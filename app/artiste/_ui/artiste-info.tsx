@@ -21,7 +21,7 @@ export default function ArtisteInfo({
         </p>
         <div className="grid grid-cols-2 gap-6 mt-5">
           {socials?.map((s) => (
-            <Link href={s.link} key={name}>
+            <Link href={s.link} key={s.name}>
               <p className={`font-mono underline cursor-pointer`}>{s.name}</p>
             </Link>
           ))}

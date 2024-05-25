@@ -8,6 +8,7 @@ export interface Artiste {
   image2?: string;
   projects?: ProjectProps[];
   socials?: Social[];
+  artisteSpotifyId?: string;
 }
 
 export interface Social {

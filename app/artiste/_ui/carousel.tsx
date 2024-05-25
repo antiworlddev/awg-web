@@ -25,17 +25,18 @@ export default function Carousel({ projects }: { projects: ProjectProps[] }) {
               perPage: 1,
             },
           },
-          perMove: 1,
+
           drag: "free",
         }}
       >
-        {projects.map((p, i) => (
+        {projects?.map((p, i) => (
           <SplideSlide key={i} className="flex items-center justify-center">
             <ProjectCard
               art={p.art}
               artist={p.artist}
               project={p.project}
               title={p.title}
+              link={p.link}
             />
           </SplideSlide>
         ))}
