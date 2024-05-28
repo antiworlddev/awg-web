@@ -4,7 +4,6 @@ import { generateSlug } from "@/helpers/functions";
 import { useAppContext } from "@/helpers/store";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 
 export default function ArtisteNav({ font }: { font: string }) {
   const context = useAppContext();

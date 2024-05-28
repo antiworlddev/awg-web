@@ -1,5 +1,4 @@
 import { SectionProps } from "@/helpers/types";
-import React from "react";
 
 export default function Section({ label, children, id, font }: SectionProps) {
   return (

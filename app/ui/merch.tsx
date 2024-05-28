@@ -1,10 +1,6 @@
 import { MerchProps } from "@/helpers/types";
-import useWindowSize from "@/hooks/useWindowSize";
-import React from "react";
 
 export default function Merch({ image, category, price, name }: MerchProps) {
-  const { width, height } = useWindowSize();
-
   const naira = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "NGN",

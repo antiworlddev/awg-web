@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function PreHeader({ text }: { text: string }) {
   return (
     <div className="w-full h-10 bg-dark bg-opacity-95 flex items-center justify-center">

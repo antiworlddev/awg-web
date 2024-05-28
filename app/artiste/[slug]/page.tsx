@@ -7,7 +7,7 @@ import { generateSlug } from "@/helpers/functions";
 import { Vast_Shadow, Major_Mono_Display } from "next/font/google";
 import Discography from "../_ui/discography";
 import ArtisteMerch from "../_ui/artiste-merch";
-import { fetchArtisteAlbums } from "@/helpers/api";
+import { fetchArtisteAlbums } from "@/app/utils/api";
 import { useQuery } from "@tanstack/react-query";
 
 const vast_shadow = Vast_Shadow({

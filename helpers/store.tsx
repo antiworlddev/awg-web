@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import { MerchProps, SharedState } from "./types";
 
 const AppContext = createContext<SharedState>({} as SharedState);
@@ -100,7 +100,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     {
       artisteSpotifyId: "1CENr91YcmLqLMk3fPeqze",
       name: "AGUNNA",
-      bio: "Hailing from Tampa, Florida, Doechii is a 25-year-old multihyphenate on her way to becoming the embodiment of pop culture. A singer-rapper-actor-dancer-entertainer, she began her music career by releasing “Girls” on SoundCloud in 2016, followed by additional singles, including “Spookie Coochie.” Building her fan base primarily on YouTube through personable vlogs, Doechii is confident, bold, unapologetic, transparent, and raw in everything she does. Recent performances include opening on SZA’s Good Days tour, Afropunk Atlanta 2021, and the BET Hip Hop Awards 2021 with Isaiah Rashad & Kal Banx. Recently listed as a 2022 Artist To Watch by Spotify, Complex’s Pigeons & Planes, and HipHopDX, Doechii continues to prove she is an artist you need to have on your playlist. From being personally called by Beyoncé to be an opener for one of her shows, to now going on her first arena tour with Doja Cat, Doechii is just getting started.",
+      bio: `Rapper, singer, and songwriter Agunna is an electrifying performer from Abuja, Nigeria. Known for his versatile sound, he blends Hip-hop, R&B, Afro-Swing, Afrobeat, and Alternative influences. Agunna made his mark in 2017 with the collective Blvcksheep, releasing the mixtape TABS (To All Blvcksheep) featuring the hit single "Farabale," which became an anthem in Abuja. In 2018, Agunna joined forces with Replay, Cross, and Fatboy-E to form the Antiworld Gangstars, a powerhouse collective that showcased their talents on the acclaimed album Gang Business. This collaboration solidified their influence in the Abuja music scene. Agunna’s dynamic style and captivating performances have earned him a dedicated following. His seamless transitions between genres and commitment to authenticity continue to push the boundaries of contemporary music, making him a rising star in Nigeria's music industry.`,
       image1: "/ag/ag1.png",
       image2: "/ag/ag2.jpg",
       socials: [
