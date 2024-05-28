@@ -2,6 +2,8 @@
 
 import { createContext, useContext } from "react";
 import { MerchProps, SharedState } from "./types";
+import { useQuery } from "@tanstack/react-query";
+import { fetchArtisteAlbums } from "@/app/utils/api";
 
 const AppContext = createContext<SharedState>({} as SharedState);
 
@@ -448,9 +450,26 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       category: "Hoodie",
     },
   ];
+
+  const { data: albumData, isError: albumError } = useQuery({
+    queryKey: ["awg-tracks"],
+    queryFn: async () => fetchArtisteAlbums("4em6zsRUNAPC2YTfqdCpow"),
+  });
+
+  const awgProjects = albumData?.items?.map((item: any) => {
+    return {
+      project: item?.album_group,
+      title: item?.name,
+      art: item?.images[1]?.url,
+      artist: item?.artists?.map((a: any) => a.name)?.join(" & "),
+      link: item?.external_urls?.spotify,
+    };
+  });
+
   const sharedState: SharedState = {
     artistes,
     all_merch,
+    awgProjects,
   };
 
   return (

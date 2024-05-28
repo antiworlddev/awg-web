@@ -1,9 +1,12 @@
+"use client";
+
 import ArtisteNav from "./ui/artiste-nav";
 import Header from "./ui/header";
 import HeroGrid from "./ui/hero-grid";
 import HeroGrid2 from "./ui/hero-grid2";
 import Discography from "./artiste/_ui/discography";
 import { Vast_Shadow, Major_Mono_Display } from "next/font/google";
+import { useAppContext } from "@/helpers/store";
 
 const vast_shadow = Vast_Shadow({
   weight: "400",
@@ -22,23 +25,8 @@ const major_mono_display = Major_Mono_Display({
   style: "normal",
 });
 
-export default async function Home() {
-  const res = await fetch(
-    "http:localhost:3000/api/get-artiste-albums?artistId=4em6zsRUNAPC2YTfqdCpow",
-    { cache: "no-store" }
-  );
-
-  const data = await res.json();
-
-  const artisteProjects = data?.items?.map((item: any) => {
-    return {
-      project: item?.album_group,
-      title: item?.name,
-      art: item?.images[1]?.url,
-      artist: item?.artists?.map((a: any) => a.name)?.join(" & "),
-      link: item?.external_urls?.spotify,
-    };
-  });
+export default function Home() {
+  const context = useAppContext();
 
   return (
     <main className="flex min-h-screen flex-col lg:items-start items-center w-full lg:px-24 md:px-12 px-6">
@@ -48,7 +36,7 @@ export default async function Home() {
       <HeroGrid2 />
       <Discography
         font={major_mono_display.className}
-        projects={artisteProjects}
+        projects={context?.awgProjects}
       />
     </main>
   );

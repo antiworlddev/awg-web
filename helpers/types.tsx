@@ -19,6 +19,7 @@ export interface Social {
 export interface SharedState {
   artistes: Artiste[];
   all_merch: MerchProps[];
+  awgProjects: ProjectProps[];
 }
 
 export interface SectionProps {
