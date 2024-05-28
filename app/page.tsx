@@ -24,7 +24,8 @@ const major_mono_display = Major_Mono_Display({
 
 export default async function Home() {
   const res = await fetch(
-    "http:localhost:3000/api/get-artiste-albums?artistId=4em6zsRUNAPC2YTfqdCpow"
+    "http:localhost:3000/api/get-artiste-albums?artistId=4em6zsRUNAPC2YTfqdCpow",
+    { cache: "no-store" }
   );
 
   const data = await res.json();
