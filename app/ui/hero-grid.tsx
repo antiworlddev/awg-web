@@ -15,7 +15,7 @@ export default function HeroGrid() {
           ANTIWORLD
         </p>
 
-        <Image src="/gang/gang3.jpg" width={600} height={350} alt="gang1" />
+        <Image src="/gang/gang9.jpg" width={600} height={350} alt="gang1" />
       </div>
     </div>
   );
