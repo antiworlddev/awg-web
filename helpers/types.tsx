@@ -9,6 +9,7 @@ export interface Artiste {
   projects?: ProjectProps[];
   socials?: Social[];
   artisteSpotifyId?: string;
+  videoIds?: string[];
 }
 
 export interface Social {

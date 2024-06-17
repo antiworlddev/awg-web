@@ -7,6 +7,9 @@ import HeroGrid2 from "./ui/hero-grid2";
 import Discography from "./artiste/_ui/discography";
 import { Vast_Shadow, Major_Mono_Display } from "next/font/google";
 import { useAppContext } from "@/helpers/store";
+import ArtisteMerch from "./artiste/_ui/artiste-merch";
+import VideoBox from "./ui/video-box";
+import VideoGrid from "./ui/video-grid";
 
 const vast_shadow = Vast_Shadow({
   weight: "400",
@@ -27,6 +30,7 @@ const major_mono_display = Major_Mono_Display({
 
 export default function Home() {
   const context = useAppContext();
+  const videoIds = ["c551kDpThuw", "NncnrNTtAxQ", "y_aoDpAGbFY", "DqMtbVI1UyI"];
 
   return (
     <main className="flex min-h-screen flex-col lg:items-start items-center w-full lg:px-24 md:px-12 px-6">
@@ -38,6 +42,8 @@ export default function Home() {
         font={major_mono_display.className}
         projects={context?.awgProjects}
       />
+      <VideoGrid videoIds={videoIds} />
+      <ArtisteMerch merch={context?.all_merch.slice(0, 4)} />
     </main>
   );
 }

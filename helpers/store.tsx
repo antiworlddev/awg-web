@@ -53,6 +53,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
           title: "Technician",
         },
       ],
+      videoIds: ["UXOO0UaXwGo", "SNoS_RauCw8", "Ts8keLThN_s", "pr5YwkazQbw"],
     },
     {
       artisteSpotifyId: "2UausQcu26M23zEr5rUODB",
@@ -98,6 +99,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
           title: "Show Must Go On",
         },
       ],
+      videoIds: ["4QbKE8XX9UY", "_AdfES3wFU8", "9_mcBuAjX9Y", "Bp1CPGPGdg8"],
     },
     {
       artisteSpotifyId: "1CENr91YcmLqLMk3fPeqze",
@@ -143,6 +145,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
           title: "Technician",
         },
       ],
+      videoIds: ["WxvDJLYrNgc", "03VgX_mCGlw", "Z4JMNd8F-Uk", "5GPJM7ztA7M"],
     },
     {
       artisteSpotifyId: "7oQ6PiDrtScurCpBvMtf5b",
@@ -188,6 +191,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
           title: "Technician",
         },
       ],
+      videoIds: ["DqMtbVI1UyI", "UZLgpZ8zfXU", "jLmmOePLGBs", "_2mYAZGefRo"],
     },
     {
       artisteSpotifyId: "5GxgrhXvXlieEQX1KThYzh",
@@ -233,6 +237,7 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
           title: "Technician",
         },
       ],
+      videoIds: ["0zULMlBf-A4", "_F2t6WeTHyw", "AbCYqhQQs54", "eHcPCDU9ueM"],
     },
     {
       artisteSpotifyId: "4em6zsRUNAPC2YTfqdCpow",

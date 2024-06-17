@@ -5,14 +5,28 @@ import { useAppContext } from "@/helpers/store";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function ArtisteNav({ font }: { font: string }) {
+export default function ArtisteNav({
+  font,
+  active,
+}: {
+  font: string;
+  active?: string;
+}) {
   const context = useAppContext();
 
   const { artistes } = context;
 
+  let shownArtistes = [...artistes];
+
+  if (active !== undefined) {
+    shownArtistes = shownArtistes.filter(
+      (a) => generateSlug(a.name) !== active
+    );
+  }
+
   return (
-    <div className="grid lg:grid-cols-3 grid-cols-1 gap-x-12 gap-y-28 justify-between w-full my-32">
-      {artistes?.map((a, i) => (
+    <div className="grid md:grid-cols-3 grid-cols-1 gap-x-12 gap-y-28 justify-between w-full my-32">
+      {shownArtistes?.map((a, i) => (
         <div
           key={a.name}
           className={`justify-center flex items-center p-3 group hover:bg-dark cursor-pointer relative`}
