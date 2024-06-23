@@ -59,3 +59,9 @@ export interface CartItemProps {
   item: MerchProps;
   quantity: number;
 }
+
+export interface IncrementerProps {
+  leftClick: () => void;
+  rightClick: () => void;
+  value: number;
+}

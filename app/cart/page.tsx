@@ -32,7 +32,7 @@ export default function Page() {
                 <tbody className="">
                   {cart?.map((c, i) => (
                     <tr className="border-b">
-                      <td className="px-4 py-2 flex items-center">
+                      <td className="px-4 py-2 flex lg:flex-row flex-col items-start lg:items-center">
                         <Image
                           width={150}
                           height={150}

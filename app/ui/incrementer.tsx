@@ -1,4 +1,6 @@
-function Incrementer({ leftClick, rightClick, value }) {
+import { IncrementerProps } from "@/helpers/types";
+
+function Incrementer({ leftClick, rightClick, value }: IncrementerProps) {
   return (
     <div className="justify-between flex items-center">
       <svg

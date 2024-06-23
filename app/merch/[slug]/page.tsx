@@ -38,19 +38,21 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <div className="flex min-h-screen flex-col w-full lg:px-24 px-6">
       <Header itemsCount={context?.cart?.length} />
-      <div className="flex items-start center space-x-16 w-full mt-10">
-        <div className="w-[600px] h-[600px] relative">
+      <div className="flex lg:flex-row  flex-col lg:items-start lg:justify-center items-center lg:space-x-16 w-full lg:mt-10">
+        <div className="lg:w-[600px] lg:h-[600px] w-[300px] h-[300px] relative">
           <Image alt="merch" src={merch?.image ?? ""} fill={true} />
         </div>
-        <div>
-          <p className="text-4xl font-medium tracking-wider">{merch?.name}</p>
-          <p className="mt-6 text-lg tracking-wide">
+        <div className="flex flex-col lg:items-start items-center">
+          <p className="lg:text-4xl text-2xl font-medium tracking-wider text-center">
+            {merch?.name}
+          </p>
+          <p className="mt-6 lg:text-lg tracking-wide">
             ₦{merch?.price && merch?.price * orderDetails.quantity}
           </p>
-          <p className="mt-8 tracking-wider">
+          <p className="mt-8 tracking-wider lg:text-base text-sm">
             Designed and Crafted in {merch?.city}, {merch?.country}.
           </p>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-col items-center">
             <p>Size</p>
             <select
               onChange={(e) =>
@@ -63,7 +65,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               ))}
             </select>
           </div>
-          <div className="mt-6">
+          <div className="mt-6 flex flex-col items-center">
             <p>Quantity</p>
             <div className="mt-4 w-64 p-3 border-dark border ">
               <Incrementer
@@ -95,7 +97,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 ? addToBag
                 : undefined
             }
-            className={`mt-24 w-64 p-3 border-dark border flex items-center ${
+            className={`lg:mt-24 mt-16 w-64 p-3 border-dark border flex items-center ${
               orderDetails?.quantity === 0 && "cursor-not-allowed"
             } justify-center hover:bg-dark/10 ${
               isMerchInCart ? "bg-dark/10 cursor-not-allowed" : "cursor-pointer"

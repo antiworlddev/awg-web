@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 const countries = [
+  { name: "Nigeria", currency: "NGN" },
   { name: "United States", currency: "USD" },
   { name: "Canada", currency: "CAD" },
   { name: "United Kingdom", currency: "GBP" },

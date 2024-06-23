@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function CheckoutBox({ cart }: { cart: CartItemProps[] }) {
   const shippingFee = 6000;
   return (
-    <div className="p-3 border border-dark lg:w-[46%] w-full lg:mb-0 mb-10">
+    <div className="p-3 border border-dark lg:w-[46%] w-full lg:mb-0 mb-16 lg:mt-0 mt-10">
       <div className="w-full lg:p-8 p-2">
         {cart?.map((c) => (
           <div className="flex items-center justify-between w-full lg:mb-2 mb-1">
