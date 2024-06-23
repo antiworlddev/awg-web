@@ -61,7 +61,7 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <div className="flex min-h-screen flex-col w-full lg:px-24 px-6">
-      <Header />
+      <Header itemsCount={context?.cart?.length} />
       <ArtisteInfo
         bio={artiste?.bio}
         image2={artiste?.image2}

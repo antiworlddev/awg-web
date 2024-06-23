@@ -21,6 +21,8 @@ export interface SharedState {
   artistes: Artiste[];
   all_merch: MerchProps[];
   awgProjects: ProjectProps[];
+  cart: CartItemProps[];
+  setcart: (value: CartItemProps[]) => void;
 }
 
 export interface SectionProps {
@@ -39,9 +41,21 @@ export interface ProjectProps {
 }
 
 export interface MerchProps {
+  id: string;
   image: string;
   category?: string;
   name: string;
   price: number;
   artiste?: string;
+  viewProduct?: () => void;
+  country?: string;
+  city?: string;
+  sizes?: string[];
+  quantity?: number;
+  size?: string;
+}
+
+export interface CartItemProps {
+  item: MerchProps;
+  quantity: number;
 }

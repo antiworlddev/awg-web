@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext } from "react";
-import { MerchProps, SharedState } from "./types";
+import { createContext, useContext, useState } from "react";
+import { CartItemProps, MerchProps, SharedState } from "./types";
 import { useQuery } from "@tanstack/react-query";
 import { fetchArtisteAlbums } from "@/app/utils/api";
 
@@ -287,11 +287,64 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
   ];
   const all_merch: MerchProps[] = [
     {
+      image: "/gang/gang-merch1.png",
+      name: "AWG B/Y JERSEY",
+      price: 45000,
+      artiste: "awg",
+      category: "jersey",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00000",
+    },
+    {
+      image: "/gang/gang-merch2.png",
+      name: "Property of AWG Tee",
+      price: 45000,
+      artiste: "awg",
+      category: "tshirt",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00001",
+    },
+    {
+      image: "/gang/gang-merch3.png",
+      name: "AWG ALT JERSEY",
+      price: 45000,
+      artiste: "awg",
+      category: "jersey",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00002",
+    },
+    {
+      image: "/gang/awg-rap-attack.png",
+      name: "AWG Rap Attack Tee",
+      price: 45000,
+      artiste: "awg",
+      category: "tshirt",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00003",
+    },
+    {
       image: "/dummy/dummymerch.jpg",
       name: "Who De Check Am Hoodie",
       price: 45000,
       artiste: "Reeplay",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00000",
     },
     {
       image: "/dummy/dummymerch2.jpg",
@@ -299,6 +352,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Reeplay",
       category: "hat",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00001",
     },
     {
       image: "/dummy/dummymerch3.jpg",
@@ -306,6 +364,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Reeplay",
       category: "hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00002",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -313,6 +376,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Reeplay",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00003",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -320,6 +388,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Odumodublvck",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00004",
     },
     {
       image: "/dummy/dummymerch2.jpg",
@@ -327,6 +400,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Odumodublvck",
       category: "hat",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00005",
     },
     {
       image: "/dummy/dummymerch3.jpg",
@@ -334,6 +412,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Odumodublvck",
       category: "hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00006",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -341,6 +424,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Odumodublvck",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00007",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -348,6 +436,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Fatboy E",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00008",
     },
     {
       image: "/dummy/dummymerch2.jpg",
@@ -355,6 +448,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Fatboy E",
       category: "hat",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00009",
     },
     {
       image: "/dummy/dummymerch3.jpg",
@@ -362,6 +460,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Fatboy E",
       category: "hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00010",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -369,6 +472,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Fatboy E",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00011",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -376,6 +484,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Agunna",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00012",
     },
     {
       image: "/dummy/dummymerch2.jpg",
@@ -383,6 +496,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Agunna",
       category: "hat",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00013",
     },
     {
       image: "/dummy/dummymerch3.jpg",
@@ -390,6 +508,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Agunna",
       category: "hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00014",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -397,6 +520,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Agunna",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00015",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -404,6 +532,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Shagba",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00016",
     },
     {
       image: "/dummy/dummymerch2.jpg",
@@ -411,6 +544,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Shagba",
       category: "hat",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00017",
     },
     {
       image: "/dummy/dummymerch3.jpg",
@@ -418,6 +556,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Shagba",
       category: "hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00018",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -425,6 +568,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Shagba",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00019",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -432,6 +580,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Cross",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00020",
     },
     {
       image: "/dummy/dummymerch2.jpg",
@@ -439,6 +592,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Cross",
       category: "hat",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00021",
     },
     {
       image: "/dummy/dummymerch3.jpg",
@@ -446,6 +604,11 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Cross",
       category: "hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00022",
     },
     {
       image: "/dummy/dummymerch.jpg",
@@ -453,8 +616,14 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
       price: 45000,
       artiste: "Cross",
       category: "Hoodie",
+      quantity: 10,
+      country: "Nigeria",
+      city: "Abuja",
+      sizes: ["s", "m", "l", "xl", "xxl"],
+      id: "00023",
     },
   ];
+  const [cart, setcart] = useState<CartItemProps[]>([]);
 
   const { data: albumData, isError: albumError } = useQuery({
     queryKey: ["awg-tracks"],
@@ -475,6 +644,8 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     artistes,
     all_merch,
     awgProjects,
+    cart,
+    setcart,
   };
 
   return (

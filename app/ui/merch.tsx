@@ -1,6 +1,12 @@
 import { MerchProps } from "@/helpers/types";
 
-export default function Merch({ image, category, price, name }: MerchProps) {
+export default function Merch({
+  image,
+  category,
+  price,
+  name,
+  viewProduct,
+}: MerchProps) {
   const naira = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "NGN",
@@ -8,6 +14,7 @@ export default function Merch({ image, category, price, name }: MerchProps) {
 
   return (
     <div
+      onClick={viewProduct}
       className={`${""} transition-transform duration-300 ease-out cursor-pointer hover:scale-105 flex flex-col items-center`}
     >
       <div
