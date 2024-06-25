@@ -1,3 +1,4 @@
+import { formatter } from "@/helpers/functions";
 import { MerchProps } from "@/helpers/types";
 
 export default function Merch({
@@ -7,11 +8,6 @@ export default function Merch({
   name,
   viewProduct,
 }: MerchProps) {
-  const naira = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "NGN",
-  });
-
   return (
     <div
       onClick={viewProduct}
@@ -28,7 +24,9 @@ export default function Merch({
       <p className="text-base font-semibold uppercase mb-4 text-center">
         {name}
       </p>
-      <p className="text-xs font-medium text-center">{naira.format(price)}</p>
+      <p className="text-xs font-medium text-center">
+        {formatter.format(price)}
+      </p>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import Header from "../ui/header";
 import Image from "next/image";
 import Incrementer from "../ui/incrementer";
 import { useRouter } from "next/navigation";
+import { formatter } from "@/helpers/functions";
 
 export default function Page() {
   const context = useAppContext();
@@ -78,7 +79,7 @@ export default function Page() {
                         </div>
                       </td>
                       <td className="px-4 py-2">
-                        ₦{c.item.price * c.quantity}
+                        {formatter.format(c.item.price * c.quantity)}
                       </td>
                     </tr>
                   ))}
@@ -90,10 +91,11 @@ export default function Page() {
             <span className="flex items-center justify-start space-x-3">
               <p className="font-medium text-lg">Estimated Total</p>
               <p className="font-light">
-                ₦
-                {cart?.reduce(
-                  (sum, item) => item.item.price * item.quantity + sum,
-                  0
+                {formatter.format(
+                  cart?.reduce(
+                    (sum, item) => item.item.price * item.quantity + sum,
+                    0
+                  )
                 )}
               </p>
             </span>

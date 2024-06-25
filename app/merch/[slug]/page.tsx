@@ -2,6 +2,7 @@
 
 import Header from "@/app/ui/header";
 import Incrementer from "@/app/ui/incrementer";
+import { formatter } from "@/helpers/functions";
 import { useAppContext } from "@/helpers/store";
 import Image from "next/image";
 import { useState } from "react";
@@ -47,12 +48,14 @@ export default function Page({ params }: { params: { slug: string } }) {
             {merch?.name}
           </p>
           <p className="mt-6 lg:text-lg tracking-wide">
-            ₦{merch?.price && merch?.price * orderDetails.quantity}
+            {formatter.format(
+              (merch?.price && merch?.price * orderDetails.quantity) ?? 0
+            )}
           </p>
           <p className="mt-8 tracking-wider lg:text-base text-sm">
             Designed and Crafted in {merch?.city}, {merch?.country}.
           </p>
-          <div className="mt-6 flex flex-col items-center">
+          <div className="mt-6 flex flex-col lg:items-start items-center">
             <p>Size</p>
             <select
               onChange={(e) =>
@@ -65,7 +68,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               ))}
             </select>
           </div>
-          <div className="mt-6 flex flex-col items-center">
+          <div className="mt-6 flex flex-col lg:items-start items-center">
             <p>Quantity</p>
             <div className="mt-4 w-64 p-3 border-dark border ">
               <Incrementer

@@ -1,3 +1,4 @@
+import { formatter } from "@/helpers/functions";
 import { CartItemProps } from "@/helpers/types";
 import Image from "next/image";
 
@@ -25,7 +26,9 @@ export default function CheckoutBox({ cart }: { cart: CartItemProps[] }) {
                 </p>
               </div>
             </div>
-            <p className="lg:text-base text-sm">₦{c?.item?.price}</p>
+            <p className="lg:text-base text-sm">
+              ₦{formatter.format(c?.item?.price)}
+            </p>
           </div>
         ))}
         <div className="w-full flex items-center justify-between">
@@ -45,10 +48,11 @@ export default function CheckoutBox({ cart }: { cart: CartItemProps[] }) {
             Subtotal
           </p>
           <p className="font-light tracking-wide lg:text-base text-sm">
-            ₦
-            {cart?.reduce(
-              (sum, item) => item.item.price * item.quantity + sum,
-              0
+            {formatter.format(
+              cart?.reduce(
+                (sum, item) => item.item.price * item.quantity + sum,
+                0
+              )
             )}
           </p>
         </div>
@@ -57,7 +61,7 @@ export default function CheckoutBox({ cart }: { cart: CartItemProps[] }) {
             Shipping Fee
           </p>
           <p className="font-light tracking-wide lg:text-base text-sm">
-            ₦{shippingFee}
+            {formatter.format(shippingFee)}
           </p>
         </div>
         <div className="flex items-center justify-between w-full mt-3">
@@ -65,11 +69,12 @@ export default function CheckoutBox({ cart }: { cart: CartItemProps[] }) {
             Total
           </p>
           <p className="font-medium tracking-wide lg:text-lg text-base">
-            ₦
-            {cart?.reduce(
-              (sum, item) => item.item.price * item.quantity + sum,
-              0
-            ) + shippingFee}
+            {formatter.format(
+              cart?.reduce(
+                (sum, item) => item.item.price * item.quantity + sum,
+                0
+              ) + shippingFee
+            )}
           </p>
         </div>
       </div>
