@@ -2,8 +2,6 @@
 
 import { useAppContext } from "@/helpers/store";
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-import { getAllActiveProducts } from "@/helpers/api-controller";
 import Merch from "@/app/ui/merch";
 
 export default function SimilarMerch({ items, viewMerch }: any) {

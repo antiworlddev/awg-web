@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  createOrder,
-  updateProductsStock,
-  verifyTransaction,
-} from "@/helpers/api-controller";
+import { createOrder, verifyTransaction } from "@/helpers/api-controller";
 import { useMutation } from "@tanstack/react-query";
 import { DateTime } from "luxon";
 import { useRouter, useSearchParams } from "next/navigation";

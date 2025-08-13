@@ -98,159 +98,159 @@ export async function updateOrder(data: any) {
   }
 }
 
-export async function addTailor(data: any) {
-  try {
-    return await axios.put(`/api/orders/add-tailor`, data);
-  } catch (error) {
-    return error;
-  }
-}
+// export async function addTailor(data: any) {
+//   try {
+//     return await axios.put(`/api/orders/add-tailor`, data);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-//deliveries
-export async function getDeliveries() {
-  try {
-    const deliveries = await axios.get(`/api/orders/get-deliveries`);
-    return deliveries.data;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// //deliveries
+// export async function getDeliveries() {
+//   try {
+//     const deliveries = await axios.get(`/api/orders/get-deliveries`);
+//     return deliveries.data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
-//products
-export async function updateProduct(data: any) {
-  try {
-    return await axios.put(`/api/products/update-product`, data);
-  } catch (error) {
-    return error;
-  }
-}
+// //products
+// export async function updateProduct(data: any) {
+//   try {
+//     return await axios.put(`/api/products/update-product`, data);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-export async function updateProductsStock(items: any) {
-  try {
-    return await axios.put(`/api/products/update-products-stock`, items);
-  } catch (error) {
-    return error;
-  }
-}
+// export async function updateProductsStock(items: any) {
+//   try {
+//     return await axios.put(`/api/products/update-products-stock`, items);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-export async function addNewProduct(product: MerchProps) {
-  try {
-    return await axios.post(`/api/products/add-new-product`, product);
-  } catch (error) {
-    return error;
-  }
-}
+// export async function addNewProduct(product: MerchProps) {
+//   try {
+//     return await axios.post(`/api/products/add-new-product`, product);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-export async function getAllProducts() {
-  try {
-    const products = await axios.get(`/api/products/get-all-products`);
-    return products.data;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// export async function getAllProducts() {
+//   try {
+//     const products = await axios.get(`/api/products/get-all-products`);
+//     return products.data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
-export async function getAllActiveProducts() {
-  try {
-    const products = await axios.get(`/api/products/get-all-active-products`);
-    return products.data;
-  } catch (err) {
-    return err;
-  }
-}
+// export async function getAllActiveProducts() {
+//   try {
+//     const products = await axios.get(`/api/products/get-all-active-products`);
+//     return products.data;
+//   } catch (err) {
+//     return err;
+//   }
+// }
 
-export async function getProduct(id: string) {
-  try {
-    const product = await axios.get(`/api/products/get-product?id=${id}`);
-    return product.data;
-  } catch (err) {
-    return err;
-  }
-}
-export async function deleteProduct(id: any) {
-  try {
-    return await axios.delete(`/api/products/delete-product?id=${id}`);
-  } catch (error) {
-    return error;
-  }
-}
+// export async function getProduct(id: string) {
+//   try {
+//     const product = await axios.get(`/api/products/get-product?id=${id}`);
+//     return product.data;
+//   } catch (err) {
+//     return err;
+//   }
+// }
+// export async function deleteProduct(id: any) {
+//   try {
+//     return await axios.delete(`/api/products/delete-product?id=${id}`);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-//admins
-export async function getAdmins() {
-  try {
-    const admins = await axios.get(`/api/admins/get-admins`);
-    return admins.data;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// //admins
+// export async function getAdmins() {
+//   try {
+//     const admins = await axios.get(`/api/admins/get-admins`);
+//     return admins.data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
-export async function updateLastSeen(admin: string) {
-  try {
-    return await axios.post(`/api/admins/update-login`, { admin });
-  } catch (error) {
-    return error;
-  }
-}
+// export async function updateLastSeen(admin: string) {
+//   try {
+//     return await axios.post(`/api/admins/update-login`, { admin });
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-//content
-export async function createBanner(data: any) {
-  try {
-    return await axios.post(`/api/banners/create-banner`, data);
-  } catch (error) {
-    return error;
-  }
-}
+// //content
+// export async function createBanner(data: any) {
+//   try {
+//     return await axios.post(`/api/banners/create-banner`, data);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-export async function updateBanner(data: any) {
-  try {
-    return await axios.post(`/api/banners/update-banner`, data);
-  } catch (error) {
-    return error;
-  }
-}
+// export async function updateBanner(data: any) {
+//   try {
+//     return await axios.post(`/api/banners/update-banner`, data);
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-export async function getBanners() {
-  try {
-    const banners = await axios.get(`/api/banners/get-banners`);
-    return banners.data;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// export async function getBanners() {
+//   try {
+//     const banners = await axios.get(`/api/banners/get-banners`);
+//     return banners.data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
-export async function getPretext() {
-  try {
-    const pretext = await axios.get(`/api/content/get-pretext`);
-    return pretext.data;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// export async function getPretext() {
+//   try {
+//     const pretext = await axios.get(`/api/content/get-pretext`);
+//     return pretext.data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
-export async function updatePretext(text: string) {
-  try {
-    return await axios.post(`/api/content/update-pretext`, { text });
-  } catch (error) {
-    return error;
-  }
-}
+// export async function updatePretext(text: string) {
+//   try {
+//     return await axios.post(`/api/content/update-pretext`, { text });
+//   } catch (error) {
+//     return error;
+//   }
+// }
 
-//analytics
-export async function getTopSellers() {
-  try {
-    const topSellers = await axios.get(`/api/analytics/get-top-sellers`);
-    return topSellers.data;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-}
+// //analytics
+// export async function getTopSellers() {
+//   try {
+//     const topSellers = await axios.get(`/api/analytics/get-top-sellers`);
+//     return topSellers.data;
+//   } catch (err) {
+//     console.log(err);
+//     return err;
+//   }
+// }
 
 //outside
 export async function getCalendar() {
