@@ -10,8 +10,9 @@ type TableForm = {
 };
 interface TablesProps {
   tables: { [type: string]: TicketOption };
+  description: string;
 }
-export default function Tables({ tables }: TablesProps) {
+export default function Tables({ tables, description }: TablesProps) {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [formData, setFormData] = useState<Record<string, TableForm>>({});
@@ -87,14 +88,14 @@ export default function Tables({ tables }: TablesProps) {
                     }
 
                     const message = `
-              Hello, I’d like to RSVP for a ${type} table.
+              Hello, I’d like to RSVP for a ${type} table at ${description}.
               Name: ${data.name}
               Email: ${data.email}
               Phone Number: ${data.phoneNumber}
               Price: ₦${price.toLocaleString()}
                   `;
 
-                    const url = `https://wa.me/2349033464348?text=${encodeURIComponent(
+                    const url = `https://wa.me/2348088650645?text=${encodeURIComponent(
                       message
                     )}`;
                     window?.open(url, "_blank");

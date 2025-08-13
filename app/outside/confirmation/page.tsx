@@ -5,9 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { HiCheckCircle } from "react-icons/hi";
 import jsPDF from "jspdf";
-import { useEffect } from "react";
-
-export default function ConfirmationPage() {
+import { Suspense, useEffect } from "react";
+function ConfirmationPage() {
   const searchParams = useSearchParams();
 
   const ticketType = searchParams.get("ticketType") || "";
@@ -90,5 +89,13 @@ export default function ConfirmationPage() {
         </p>
       </div>
     </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <ConfirmationPage />
+    </Suspense>
   );
 }

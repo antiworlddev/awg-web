@@ -1,9 +1,11 @@
+export const dynamic = "force-dynamic";
+
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/helpers/utils/db";
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
+    const searchParams = req.nextUrl.searchParams;
     const eventId = searchParams.get("eventId");
     const dateId = searchParams.get("dateId");
 

@@ -4,10 +4,10 @@ import { useAppContext } from "@/helpers/store";
 import Header from "../ui/header";
 import ArtisteMerch from "../artiste/_ui/artiste-merch";
 import FilterBox from "./_ui/filter-box";
-import { useMemo, useState } from "react";
+import { Suspense, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function Shop() {
+function Shop() {
   const context = useAppContext();
   const { cart, all_merch } = context;
 
@@ -78,5 +78,13 @@ export default function Shop() {
         <ArtisteMerch merch={filteredMerch} />
       </div>
     </main>
+  );
+}
+
+export default function Page() {
+  return (
+    <Suspense>
+      <Shop />
+    </Suspense>
   );
 }

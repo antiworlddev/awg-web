@@ -59,7 +59,7 @@ export default function Page() {
     const response = await makePayment({
       email: shippingInfo?.email,
       price: discountPrice + shippingFee,
-      callbackUrl: `http://localhost:3000/merch/confirmation/?email=${
+      callbackUrl: `https://antiworldgangstars.xyz/merch/confirmation/?email=${
         shippingInfo?.email
       }&quantity=${cart?.items?.reduce(
         (sum, item) => item.quantity + sum,

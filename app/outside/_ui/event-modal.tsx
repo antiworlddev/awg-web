@@ -48,17 +48,18 @@ export default function EventModal({
             </div>
           </div>
         </div>
-
         {/* Tickets Section */}
-        <Tickets
-          tickets={tickets}
-          eventId={eventId}
-          dateId={id}
-          description={description}
-        />
-
+        {Object.keys(tickets).length > 0 ? (
+          <Tickets tickets={tickets} description={description} />
+        ) : (
+          <></>
+        )}
         {/* Tables Section */}
-        <Tables tables={tables} />
+        {Object.keys(tables).length > 0 ? (
+          <Tables tables={tables} description={description} />
+        ) : (
+          <></>
+        )}
 
         {/* Close Button */}
         <div className="text-right">

@@ -16,16 +16,9 @@ type TicketForm = {
 };
 interface TicketsProps {
   tickets: { [type: string]: TicketOption };
-  eventId: string;
-  dateId: string;
   description: string;
 }
-export default function Tickets({
-  tickets,
-  eventId,
-  dateId,
-  description,
-}: TicketsProps) {
+export default function Tickets({ tickets, description }: TicketsProps) {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [formData, setFormData] = useState<Record<string, TicketForm>>({});
@@ -148,8 +141,6 @@ export default function Tickets({
                             ticketType: type,
                             quantity: quantities[type] || 0,
                             ...formData[type],
-                            eventId,
-                            dateId,
                           })
                         : console.log("Payment flow here");
                     } else {
