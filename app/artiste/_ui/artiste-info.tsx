@@ -28,7 +28,12 @@ export default function ArtisteInfo({
         </div>
       </div>
       <div className="lg:w-[595px] lg:h-[595px] w-[300px] h-[300px] relative">
-        <Image fill={true} alt="artiste-dp" src={image2 || ""} />
+        <Image
+          fill={true}
+          alt="artiste-dp"
+          src={image2 || ""}
+          className="object-cover"
+        />
       </div>
     </div>
   );

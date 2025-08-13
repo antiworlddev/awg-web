@@ -16,6 +16,8 @@ const config: Config = {
       colors: {
         dark: "#0e0e0e",
         "awg-yellow": "#FFA305",
+        coffee: "#1B1B1B",
+        lightgrey: "#F7F7F7",
       },
     },
   },

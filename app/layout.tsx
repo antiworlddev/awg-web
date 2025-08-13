@@ -11,7 +11,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "ANTIWORLD GANGSTARS",
   description:
-    "Welcome to the Home of Everything Antiworld Gangstars. Game changers and Evoluutionists",
+    "Welcome to the Home of Everything Antiworld Gangstars. Game changers and Evolutionists",
+  icons: {
+    icon: "/awg-logo.png",
+  },
 };
 
 export default function RootLayout({

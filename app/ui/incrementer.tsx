@@ -18,7 +18,7 @@ function Incrementer({ leftClick, rightClick, value }: IncrementerProps) {
           d="M15.75 19.5 8.25 12l7.5-7.5"
         />
       </svg>
-      <p className="lg:text-sm text-xs">{value}</p>
+      <p className="lg:text-sm text-xs select-none">{value}</p>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

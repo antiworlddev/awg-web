@@ -38,7 +38,12 @@ export default function ArtisteNav({
               {a.name}
             </p>
             <div className="absolute w-36 h-0 left-1/3 bottom-0 group-hover:h-36 group-hover:-translate-y-14 transition transform duration-[1000ms] ease-in-out">
-              <Image fill={true} alt={a.name} src={a.image1 || ""} />
+              <Image
+                fill={true}
+                alt={a.name}
+                src={a.image1 || ""}
+                className="object-cover"
+              />
             </div>
           </Link>
         </div>
