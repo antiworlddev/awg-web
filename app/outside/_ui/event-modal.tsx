@@ -50,7 +50,12 @@ export default function EventModal({
         </div>
         {/* Tickets Section */}
         {Object.keys(tickets).length > 0 ? (
-          <Tickets tickets={tickets} description={description} />
+          <Tickets
+            tickets={tickets}
+            description={description}
+            eventId={eventId}
+            dateId={id}
+          />
         ) : (
           <></>
         )}
