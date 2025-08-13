@@ -50,7 +50,7 @@ export default function EventDay({
             {city}, {country}
           </p>
         </div>
-        <div className="flex flex-col items-center w-1/2 lg:w-1/3">
+        <div className="flex flex-col items-center w-1/2 lg:w-1/3 text-center">
           <p className="font-semibold md:text-base text-xs">{description}</p>
           <p className="text-gray-600 md:text-base text-xs">{location}</p>
         </div>
