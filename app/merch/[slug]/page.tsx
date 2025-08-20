@@ -350,7 +350,7 @@ export default function Page(props: { params: Params }) {
           </p>
           <p className="mt-6 tracking-wider lg:text-base font-medium text-sm">
             {merch?.description
-              .split("- ")
+              ?.split("- ")
               .map((item: any) => item.trim()) // Remove extra spaces
               .filter((item: any) => item)
               .map((item: any, index: number) => (

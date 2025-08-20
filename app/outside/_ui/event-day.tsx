@@ -22,6 +22,7 @@ export default function EventDay({
   description,
   location,
   image,
+  specialGuests,
 }: EventDayWithEventName) {
   const [showModal, setShowModal] = useState(false);
   const [formattedDate, setFormattedDate] = useState("");
@@ -72,6 +73,7 @@ export default function EventDay({
           date={formattedDate}
           description={description}
           location={location}
+          specialGuests={specialGuests}
         />
       )}
     </>

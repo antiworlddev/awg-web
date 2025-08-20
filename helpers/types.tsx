@@ -27,6 +27,7 @@ export interface EventDayProps {
   country: string;
   location: string;
   description: string;
+  specialGuests?: string[];
   image?: string;
   date: string;
   tickets: { [type: string]: TicketOption };

@@ -18,6 +18,7 @@ export default function EventModal({
   id,
   date,
   description,
+  specialGuests,
   city,
   country,
   tickets,
@@ -47,6 +48,24 @@ export default function EventModal({
             </div>
           </div>
         </div>
+        {/* Special Guests */}
+        {specialGuests ? (
+          specialGuests?.length > 0 ? (
+            <div>
+              <p className="text-2xl font-bold">Special Guests</p>
+              <ul className="list-disc list-inside mt-4 mb-6">
+                {specialGuests?.map((g) => (
+                  <li className="text-xl font-semibold">{g}</li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <></>
+          )
+        ) : (
+          <></>
+        )}
+
         {/* Tickets Section */}
         {Object.keys(tickets).length > 0 ? (
           <Tickets
