@@ -3,6 +3,7 @@
 import Button from "@/app/ui/button";
 import Incrementer from "@/app/ui/incrementer";
 import { rsvpTicketsFree } from "@/helpers/api-controller";
+import { validateEmail } from "@/helpers/functions";
 import { EventDayProps, TicketOption } from "@/helpers/types";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -55,7 +56,7 @@ export default function Tickets({
   const handleIncrement = (type: string) => {
     setQuantities((prev) => ({
       ...prev,
-      [type]: (prev[type] || 0) + 1,
+      [type]: prev[type] === 2 ? prev[type] : (prev[type] || 0) + 1,
     }));
   };
 
@@ -142,6 +143,10 @@ export default function Tickets({
                 <Button
                   label={price === 0 ? "REGISTER" : "MAKE PAYMENT"}
                   onClick={() => {
+                    if (!validateEmail(formData[type]?.email)) {
+                      return;
+                    }
+
                     if (quantities[type] > 0) {
                       price === 0
                         ? rsvpFreeMutation.mutate({

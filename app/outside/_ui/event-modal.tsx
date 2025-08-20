@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Button from "@/app/ui/button";
 import { EventDayProps } from "@/helpers/types";
-import Incrementer from "@/app/ui/incrementer";
 import Tickets from "./tickets";
 import Tables from "./tables";
 

@@ -7,10 +7,10 @@ import { generateSlug } from "@/helpers/functions";
 import { Vast_Shadow, Major_Mono_Display } from "next/font/google";
 import Discography from "../_ui/discography";
 import ArtisteMerch from "../_ui/artiste-merch";
-import { fetchArtisteAlbums } from "@/app/utils/api";
 import { useQuery } from "@tanstack/react-query";
 import ArtisteNav from "@/app/ui/artiste-nav";
 import VideoGrid from "@/app/ui/video-grid";
+import { fetchArtisteAlbums } from "@/helpers/api-controller";
 
 const vast_shadow = Vast_Shadow({
   weight: "400",
@@ -35,7 +35,16 @@ export default function Page({ params }: { params: { slug: string } }) {
   const context = useAppContext();
   const artiste = context?.artistes?.find(
     (a) => generateSlug(a.name) === slug
-  ) || { bio: "", image1: "", name: "" };
+  ) || {
+    bio: "",
+    images: [],
+    name: "",
+    font: "",
+    projects: [],
+    socials: [],
+    artisteSpotifyId: "",
+    videoIds: [],
+  };
 
   const artisteMerch = context?.all_merch?.filter(
     (m) => generateSlug(m.artiste ?? "") === slug
@@ -64,7 +73,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       <Header itemsCount={context?.cart?.items?.length} />
       <ArtisteInfo
         bio={artiste?.bio}
-        image2={artiste?.image2}
+        images={artiste?.images}
         name={artiste?.name}
         font={vast_shadow.className}
         socials={artiste?.socials}

@@ -43,7 +43,7 @@ export default function Home() {
         projects={context?.awgProjects}
       />
       <VideoGrid videoIds={videoIds} />
-      <ArtisteMerch merch={context?.all_merch.slice(0, 4)} />
+      <ArtisteMerch merch={context?.all_merch?.slice(0, 4)} />
     </main>
   );
 }

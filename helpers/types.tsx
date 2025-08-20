@@ -3,9 +3,8 @@ import { ReactNode } from "react";
 export interface Artiste {
   name: string;
   bio: string;
-  image1?: string;
+  images?: string[];
   font?: string;
-  image2?: string;
   projects?: ProjectProps[];
   socials?: Social[];
   artisteSpotifyId?: string;
@@ -54,8 +53,8 @@ export interface SharedState {
   currency: string;
   setCurrency: (value: string) => void;
   currencies?: string[];
-  user?: any;
-  setuser?: (value: any) => void;
+  user: any;
+  setuser: (value: any) => void;
   exchangeRates: { [key: string]: number };
   setExchangeRates: (value: { [key: string]: number }) => void;
   selectedMerch: any;

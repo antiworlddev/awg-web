@@ -14,64 +14,70 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Normalize email for case and space
     const normalizedEmail = email.trim().toLowerCase();
-
     const eventRef = db.collection("calendar").doc(eventId);
-    const eventSnap = await eventRef.get();
 
-    if (!eventSnap.exists) {
-      return NextResponse.json(
-        { success: false, message: "Event not found" },
-        { status: 404 }
+    await db.runTransaction(async (transaction) => {
+      const eventSnap = await transaction.get(eventRef);
+
+      if (!eventSnap.exists) {
+        throw new Error("Event not found");
+      }
+
+      const eventData = eventSnap.data();
+      const dates = eventData?.dates || [];
+
+      const dateIndex = dates.findIndex((d: any) => d.id === dateId);
+      if (dateIndex === -1) {
+        throw new Error("Event date not found");
+      }
+
+      const dateData = dates[dateIndex];
+      const guestlist = dateData.guestlist || [];
+
+      const ticketInfo = dateData.tickets?.[ticketType];
+      if (!ticketInfo) {
+        throw new Error("Ticket type not found");
+      }
+
+      if (ticketInfo.count < quantity) {
+        throw new Error("Not enough tickets available");
+      }
+
+      const guestIndex = guestlist.findIndex(
+        (g: any) => g.email.trim().toLowerCase() === normalizedEmail
       );
-    }
 
-    const eventData = eventSnap.data();
-    const dates = eventData?.dates || [];
+      if (guestIndex > -1) {
+        guestlist[guestIndex][ticketType] =
+          (guestlist[guestIndex][ticketType] || 0) + quantity;
+      } else {
+        guestlist.push({
+          name,
+          email: normalizedEmail,
+          phoneNumber,
+          [ticketType]: quantity,
+        });
+      }
 
-    const dateIndex = dates.findIndex((d: any) => d.id === dateId);
-    if (dateIndex === -1) {
-      return NextResponse.json(
-        { success: false, message: "Event date not found" },
-        { status: 404 }
-      );
-    }
+      // Reduce ticket count
+      dateData.tickets[ticketType].count -= quantity;
 
-    const guestlist = dates[dateIndex].guestlist || [];
+      // Update date entry
+      dates[dateIndex] = { ...dateData, guestlist };
 
-    // Look for an existing guest by normalized email
-    const guestIndex = guestlist.findIndex(
-      (g: any) => g.email.trim().toLowerCase() === normalizedEmail
-    );
-
-    if (guestIndex > -1) {
-      // Update existing guest's ticket quantity for that ticket type
-      guestlist[guestIndex][ticketType] =
-        (guestlist[guestIndex][ticketType] || 0) + quantity;
-    } else {
-      // Add new guest entry
-      guestlist.push({
-        name,
-        email: normalizedEmail,
-        phoneNumber,
-        [ticketType]: quantity,
-      });
-    }
-
-    // Update the date's guestlist
-    dates[dateIndex].guestlist = guestlist;
-
-    await eventRef.update({ dates });
+      transaction.update(eventRef, { dates });
+    });
 
     return NextResponse.json(
       { success: true, message: "RSVP successfully recorded" },
       { status: 201 }
     );
-  } catch (err) {
-    console.error("Error in RSVP Tickets Free API:", err);
+  } catch (err: any) {
+    console.error("Error in RSVP Transaction API:", err);
+
     return NextResponse.json(
-      { success: false, message: "Internal server error" },
+      { success: false, message: err.message || "Internal server error" },
       { status: 500 }
     );
   }

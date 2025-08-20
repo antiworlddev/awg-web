@@ -1,276 +1,34 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState } from "react";
-import {
-  CalendarProps,
-  CartItemProps,
-  EventProps,
-  MerchProps,
-  SharedState,
-} from "./types";
+import { SharedState } from "./types";
 import { useQuery } from "@tanstack/react-query";
-import { fetchArtisteAlbums } from "@/app/utils/api";
-import { getExchangeRates } from "./api-controller";
+import { fetchArtisteAlbums, getArtistes } from "@/helpers/api-controller";
+import { getAllActiveMerch, getExchangeRates } from "./api-controller";
 
 const AppContext = createContext<SharedState>({} as SharedState);
 
 export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
-  const artistes = [
-    {
-      artisteSpotifyId: "3LOm0AZjpwVQebvkyanjDy",
-      name: "ODUMODUBLVCK",
-      bio: `Odumodublvck, born Tochukwu Gbubemi Ojogwu on October 18, 1993, is a trailblazing Nigerian rapper and songwriter reshaping African hip-hop with his gritty, genre-bending style known as Okporoko Rhythm—a fusion of Afrobeat, drill, grime, and highlife. Hailing from Anioma in Delta State and raised in Abuja, he’s instantly recognizable by his signature Okpu Agu (tiger cap) and unapologetically raw storytelling. After breaking out in 2022 with Picanto and achieving international acclaim with the chart-topping Declan Rice, Odumodublvck signed to Native Records in partnership with Def Jam Recordings and released his critically acclaimed 2023 mixtape Eziokwu. In 2025, he cemented his position at the forefront of Nigeria’s new wave with The Machine Is Coming, a 16-track powerhouse that debuted at number one in Nigeria and featured the standout hit Pity This Boy with Victony, which soared up the UK Official Afrobeats Chart. With multiple Headies wins, international nominations, and a fearless creative vision, Odumodublvck stands as one of the most electrifying and original voices in global music today.`,
-      image1: "/kala/kala1.png",
-      image2: "/kala/kala2.jpg",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/odumodublvck_",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/odumodublvck",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/odumodublvckodu",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/odumodublvck",
-        },
-      ],
-      videoIds: ["UXOO0UaXwGo", "SNoS_RauCw8", "Ts8keLThN_s", "pr5YwkazQbw"],
-    },
-    {
-      artisteSpotifyId: "2UausQcu26M23zEr5rUODB",
-      name: "REEPLAY",
-      bio: `Reeplay, born Jibril Adeiza Omaki, is an Abuja-based rapper and songwriter known for his razor-sharp wit, slick delivery, and unfiltered storytelling. A core member of the Anti World Gangstars collective, his music blends street grit with clever lyricism, capturing the raw energy of Nigeria’s capital city. With standout tracks like Show Must Go On, Refund Part II and his most recent AKPOR featuring teammate ODUMODUBLVCK, PORTABLE AND MAGNITO. Reeplay has carved a reputation for fearless authenticity and a sound that bridges hardcore rap with contemporary African rhythm.`,
-      image1: "/reeplay/reeplay1.png",
-      image2: "/reeplay/reeplay2.jpg",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/reeplaysumtin",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/reeplaysumtin",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/reeplayawg",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/reeplayantiworld",
-        },
-      ],
-      videoIds: ["4QbKE8XX9UY", "_AdfES3wFU8", "9_mcBuAjX9Y", "Bp1CPGPGdg8"],
-    },
-    {
-      artisteSpotifyId: "1CENr91YcmLqLMk3fPeqze",
-      name: "AGUNNA",
-      bio: `Rapper, singer, and songwriter Agunna is an electrifying performer from Abuja, Nigeria. Known for his versatile sound, he blends Hip-hop, R&B, Afro-Swing, Afrobeat, and Alternative influences. Agunna made his mark in 2017 with the collective Blvcksheep, releasing the mixtape TABS (To All Blvcksheep) featuring the hit single "Farabale," which became an anthem in Abuja. In 2018, Agunna joined forces with Odumodublvck Reeplay, Shagba, Cross, and Fatboy E to form the Antiworld Gangstars, a powerhouse collective that showcased their talents on the acclaimed album Gang Business. This collaboration solidified their influence in the Abuja music scene. Agunna’s dynamic style and captivating performances have earned him a dedicated following. His seamless transitions between genres and commitment to authenticity continue to push the boundaries of contemporary music, making him a rising star in Nigeria's music industry. Recent bangers like "Farfetch" and "Omoge Meta Shere" say yes to the fact.`,
-      image1: "/ag/ag1.png",
-      image2: "/ag/ag2.jpg",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/agunnabueze",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/agunnabueze",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/agunnabueze",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/agunnabueze",
-        },
-      ],
-      videoIds: ["WxvDJLYrNgc", "03VgX_mCGlw", "Z4JMNd8F-Uk", "5GPJM7ztA7M"],
-    },
-    {
-      artisteSpotifyId: "7oQ6PiDrtScurCpBvMtf5b",
-      name: "FATBOY E",
-      bio: `"Fatboy E," a prominent member of the Abuja Stronghold collective AntiWorld Gangstars, originally hails from Bayelsa, raised in Port Harcourt, but currently resides in Abuja. Renowned for his clever and infectious hooks, showcased notably on tracks like "Dull" and "Change Am" from Antiworld Gangstars sophomore project "Gang Business," he's made a mark in the Nigerian music scene. His EP "Fatboy Energy" underscores his versatility as a rapper, singer, and songwriter. Noteworthy collaborations include featuring on Odumodublvck’s "Shokolokobangoshe" from the "Time and Chance" EP, as well as handling the hook alongside Odumodublvck on the smash hit "Hotel Lobby" from the "Eziokwu" album. With over 15k views on YouTube, Fatboy E continues to captivate audiences with his unique style and magnetic presence. He has earned a new cult of fans from his alias Big Zoot and shows us what tha's about on his most recent freestyle release "Smoking Spree".`,
-      image1: "/fatboy/fatboy1.png",
-      image2: "/fatboy/fatboy2.png",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/fatboy__e",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/fatboy__e",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/bigzoot",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/fatboy__e",
-        },
-      ],
-      videoIds: ["DqMtbVI1UyI", "UZLgpZ8zfXU", "jLmmOePLGBs", "_2mYAZGefRo"],
-    },
-    {
-      artisteSpotifyId: "5GxgrhXvXlieEQX1KThYzh",
-      name: "SHAGBA",
-      bio: `Born in Kano State and raised in Makurdi, Shagba moved to Abuja as a teenager. Influenced early by Sisqo and 2Face’s "Grass to Grace" album, he recorded his first song at 16. Shagba released an EP and a mixtape, then joined Blvck Sheep Music. Later, he partnered with Izzgaju to form ANTIWORLD Gangsters. A business graduate from Ajayi Crowther University, Shagba's discography includes "The SBEE EP," "Son of Sam," "MARKTOWNdon EP," and "Alcohol, Drugs, and STDs." His singles, such as "Drunk," "Booze," and "Money on My Mind," have contributed to over 200k collective plays. Shagba had the whole Abuja buzzing in 2024 when he featured ABJ Heavyweight Psycho YP on "Tuface". Social media: @supershagba on all platforms.`,
-      image1: "/shagba/shagba1.png",
-      image2: "/shagba/shagba2.jpg",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/supershagba",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/supershagba",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/supershagba",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/supershagba",
-        },
-      ],
-      videoIds: ["0zULMlBf-A4", "_F2t6WeTHyw", "AbCYqhQQs54", "eHcPCDU9ueM"],
-    },
-    {
-      artisteSpotifyId: "4em6zsRUNAPC2YTfqdCpow",
-      name: "CROSS",
-      bio: `Omaki Farouk Ateiza, popularly known as Cross, is a music producer and mix engineer based in Abuja. Hailing from Nasarawa state, he was raised in Abuja and Kwara state. As a founding member of the Abuja hip hop collective "ANTIWORLD GANGSTARS," he has shaped the sounds of various artists in the drill, grime, and hip hop scenes. He produced hits like “Dull” from the Antiworld Gangstars' debut album “Gang Business,” and mixed most of the tracks. While at Afe Babalola University, he collaborated with rapper Eeskay, resulting in tracks like "9 Lives” and "Ready When You're Ready.” His notable work includes producing hits on Odumodublvck’s debut album "Eziokwu," such as WotoWoto Seasoning, Mc Oluomo, and Hotel Lobby. Upcoming projects include the 'Danger EP' by Fat Boy E and Reeplay, a solo sophomore project, and another AWG project. Cross cites 50 Cent and G-Unit as major influences, and Timbaland's "Shock Value 2" as his inspiration to produce.`,
-      image1: "/cross/cross1.png",
-      image2: "/cross/cross2.jpg",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/crossateiza",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/crossateiza",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/",
-        },
-      ],
-    },
-    {
-      artisteSpotifyId: "4em6zsRUNAPC2YTfqdCpow",
-      name: "AWG",
-      bio: `Anti World Gangstars (AWG) is a bold, culture-shifting Nigerian music collective redefining the sound and spirit of modern African hip-hop. Founded in Abuja, AWG unites a powerhouse lineup of rappers and creatives—including Odumodublvck, Reeplay, Fatboy E, Agunna, and Shagba—each bringing their own unique voice to a shared vision: music that’s raw, fearless, and unapologetically Nigerian. Their sound blends rap, drill, grime, and Afrobeat with street-rooted storytelling, reflecting the grit, humor, and resilience of Nigeria’s youth. With standout collaborative projects like NOTHING CHANGED and GANG BUSINESS, and explosive singles such as DULL, AWG has built a loyal cult following and a reputation for breaking rules, bending genres, and setting trends. More than just a group, Anti World Gangstars is a movement—one that’s turning the underground into the main stage and making Nigerian rap impossible to ignore.`,
-      image1: "/gang/gang10.png",
-      image2: "/gang/gang3.jpg",
-      socials: [
-        {
-          name: "X",
-          link: "https://x.com/antiworldgang",
-        },
-        {
-          name: "Instagram",
-          link: "https://instagram.com/antiworldgangstars",
-        },
-        {
-          name: "Snapchat",
-          link: "https://snapchat.com/",
-        },
-        {
-          name: "Tiktok",
-          link: "https://tiktok.com/antiworld_gang",
-        },
-      ],
-    },
-  ];
-  const all_merch: MerchProps[] = [
-    {
-      images: ["/gang/gang-merch1.png"],
-      name: "AWG B/Y JERSEY",
-      price: 45000,
-      artiste: "awg",
-      category: "jersey",
-      quantity: 10,
-      weight: 0.7,
-      description: "Hot new merch",
-      sizes: ["s", "m", "l", "xl", "xxl"],
-      colors: [{ name: "black", hexCode: "#000000", stock: 5 }],
-      id: "00000",
-    },
-    {
-      images: ["/gang/gang-merch2.png"],
-      name: "Property of AWG Tee",
-      price: 45000,
-      artiste: "awg",
-      category: "tshirt",
-      quantity: 10,
-      weight: 0.7,
-      description: "Hot new merch",
-      sizes: ["s", "m", "l", "xl", "xxl"],
-      colors: [{ name: "black", hexCode: "#000000", stock: 5 }],
-      id: "00001",
-    },
-    {
-      images: ["/gang/gang-merch3.png"],
-      name: "AWG ALT JERSEY",
-      price: 45000,
-      artiste: "awg",
-      category: "jersey",
-      quantity: 10,
-      weight: 0.7,
-      description: "Hot new merch",
-      sizes: ["s", "m", "l", "xl", "xxl"],
-      colors: [{ name: "black", hexCode: "#000000", stock: 5 }],
-      id: "00002",
-    },
-    {
-      images: ["/gang/awg-rap-attack.png"],
-      name: "AWG Rap Attack Tee",
-      price: 45000,
-      artiste: "awg",
-      category: "tshirt",
-      quantity: 10,
-      weight: 0.7,
-      description: "Hot new merch",
-      sizes: ["s", "m", "l", "xl", "xxl"],
-      colors: [{ name: "black", hexCode: "#000000", stock: 5 }],
-      id: "00003",
-    },
-    {
-      images: ["/reeplay/akportee.png"],
-      name: "AKPOR TEE",
-      price: 45000,
-      artiste: "Reeplay",
-      category: "tshirt",
-      quantity: 10,
-      weight: 0.7,
-      description: "Hot new merch",
-      sizes: ["s", "m", "l", "xl", "xxl"],
-      colors: [{ name: "black", hexCode: "#000000", stock: 20 }],
-      id: "00004",
-    },
-  ];
-
   const [cart, setcart] = useState<any>({ items: [], discount: "" });
+  const [user, setuser] = useState<any>(undefined);
 
   const { data: albumData, isError: albumError } = useQuery({
     queryKey: ["awg-tracks"],
     queryFn: async () => fetchArtisteAlbums("4em6zsRUNAPC2YTfqdCpow"),
   });
+
+  const { data: merchData } = useQuery({
+    queryKey: ["merch"],
+    queryFn: () => getAllActiveMerch(),
+  });
+
+  const { data: artistesData } = useQuery({
+    queryKey: ["artistes"],
+    queryFn: () => getArtistes(),
+  });
+
+  const artistes = artistesData?.artistes;
+  const all_merch = merchData?.merch;
 
   const awgProjects = albumData?.items?.map((item: any) => {
     return {
@@ -718,6 +476,8 @@ export const AppWrapper = ({ children }: { children: React.ReactNode }) => {
     awgProjects,
     cart,
     setcart,
+    user,
+    setuser,
     exchangeRates,
     setExchangeRates,
     currency,

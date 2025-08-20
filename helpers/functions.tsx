@@ -154,3 +154,9 @@ export function getShippingFee(address: any, weights: any[], type?: any) {
 
   return fee ? fee[region] : alert("Overweight");
 }
+
+export const validateEmail = (email: string) => {
+  // Simple but effective regex
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(email.toLowerCase());
+};

@@ -16,12 +16,16 @@ export default function ArtisteNav({
 
   const { artistes } = context;
 
-  let shownArtistes = [...artistes];
+  let shownArtistes;
 
-  if (active !== undefined) {
-    shownArtistes = shownArtistes.filter(
-      (a) => generateSlug(a.name) !== active
-    );
+  if (artistes !== undefined) {
+    shownArtistes = [...artistes];
+
+    if (active !== undefined) {
+      shownArtistes = shownArtistes.filter(
+        (a) => generateSlug(a.name) !== active
+      );
+    }
   }
 
   return (
@@ -41,7 +45,7 @@ export default function ArtisteNav({
               <Image
                 fill={true}
                 alt={a.name}
-                src={a.image1 || ""}
+                src={a?.images ? a?.images[0] : ""}
                 className="object-cover"
               />
             </div>

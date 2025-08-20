@@ -21,21 +21,8 @@ export async function GET(req: NextRequest) {
         const data = doc.data();
 
         // Filter for only upcoming dates
-        const upcomingDates = data.dates
-          .filter((d: any) => new Date(d.date) >= today)
-          .sort(
-            (a: any, b: any) =>
-              new Date(a.date).getTime() - new Date(b.date).getTime()
-          ) // sort ascending
-          // Remove guestlist from each date object
-          .map((d: any) => {
-            const { guestlist, ...rest } = d;
-            return rest;
-          });
 
-        return upcomingDates.length > 0
-          ? { eventId: doc.id, ...data, dates: upcomingDates }
-          : null;
+        return { eventId: doc.id, ...data };
       })
       .filter((event) => event !== null);
 

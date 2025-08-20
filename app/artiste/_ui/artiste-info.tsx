@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function ArtisteInfo({
   name,
   bio,
-  image2,
+  images,
   font,
   socials,
 }: Artiste) {
@@ -31,7 +31,7 @@ export default function ArtisteInfo({
         <Image
           fill={true}
           alt="artiste-dp"
-          src={image2 || ""}
+          src={images ? images[1] : ""}
           className="object-cover"
         />
       </div>
