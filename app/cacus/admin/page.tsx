@@ -138,7 +138,7 @@ export default function Page() {
       setrole(current?.data?.role);
       lastSeenMutation.mutate(user?.email);
     }
-  }, [user]);
+  }, [user, admins]);
 
   return (
     <div className="flex lg:flex-row flex-col">

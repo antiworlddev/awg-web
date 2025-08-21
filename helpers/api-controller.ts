@@ -281,6 +281,14 @@ export async function rsvpTicketsFree(data: any) {
   }
 }
 
+export async function addGuestAdmin(data: any) {
+  try {
+    return axios.post(`/api/outside/add-guest-cacus`, data);
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function getEventName({
   eventId,
   dateId,

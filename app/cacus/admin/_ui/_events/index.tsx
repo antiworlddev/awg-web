@@ -8,8 +8,7 @@ import { useState } from "react";
 
 export default function EventsTable() {
   const [openModal, setOpenModal] = useState(false);
-  const [selectedGuests, setSelectedGuests] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState("");
+  const [selectedRow, setSelectedRow] = useState<any>({});
   const {
     data: calendarData,
     isError: calendarError,
@@ -101,8 +100,7 @@ export default function EventsTable() {
                 </button>
                 <button
                   onClick={() => {
-                    setSelectedEvent(row.eventName);
-                    setSelectedGuests(row.guestlist);
+                    setSelectedRow({ ...row });
                     setOpenModal(true);
                   }}
                   className="px-3 py-1 text-sm border bg-blue-600 text-white rounded hover:opacity-90 mt-2"
@@ -119,8 +117,10 @@ export default function EventsTable() {
       <GuestModal
         isOpen={openModal}
         onClose={() => setOpenModal(false)}
-        guests={selectedGuests}
-        eventName={selectedEvent}
+        guests={selectedRow?.guestlist}
+        description={selectedRow?.description}
+        eventId={selectedRow?.eventId}
+        dateId={selectedRow?.id}
       />
     </div>
   );
