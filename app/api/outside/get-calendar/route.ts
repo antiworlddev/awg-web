@@ -15,29 +15,31 @@ export async function GET(req: NextRequest) {
       });
     }
 
-    const today = new Date();
+    const startOfToday = new Date();
+    startOfToday.setHours(0, 0, 0, 0);
+
+    const toLocalDateOnly = (v: any) => {
+      const d = v?.toDate ? v.toDate() : new Date(v); // handles Firestore Timestamp or string/Date
+      return new Date(d.getFullYear(), d.getMonth(), d.getDate()); // local midnight
+    };
+
     const result = snapshot.docs
       .map((doc) => {
         const data = doc.data();
 
-        // Filter for only upcoming dates
         const upcomingDates = data.dates
-          .filter((d: any) => new Date(d.date) >= today)
+          .filter((d: any) => toLocalDateOnly(d.date) >= startOfToday) // keep today & future
           .sort(
             (a: any, b: any) =>
               new Date(a.date).getTime() - new Date(b.date).getTime()
-          ) // sort ascending
-          // Remove guestlist from each date object
-          .map((d: any) => {
-            const { guestlist, ...rest } = d;
-            return rest;
-          });
+          )
+          .map(({ guestlist, ...rest }: any) => rest);
 
         return upcomingDates.length > 0
           ? { eventId: doc.id, ...data, dates: upcomingDates }
           : null;
       })
-      .filter((event) => event !== null);
+      .filter(Boolean);
 
     if (result.length === 0) {
       return NextResponse.json({
