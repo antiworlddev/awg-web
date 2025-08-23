@@ -16,7 +16,7 @@ interface VerifyResponse {
   };
 }
 
-const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_API_KEY_TEST;
+const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_API_KEY_LIVE;
 
 export async function GET(req: NextRequest) {
   const searchParams = req.nextUrl.searchParams;
