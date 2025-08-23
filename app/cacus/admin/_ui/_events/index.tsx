@@ -121,6 +121,7 @@ export default function EventsTable() {
         description={selectedRow?.description}
         eventId={selectedRow?.eventId}
         dateId={selectedRow?.id}
+        refetch={refetchCalendar}
       />
     </div>
   );

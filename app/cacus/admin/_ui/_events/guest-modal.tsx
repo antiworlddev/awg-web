@@ -1,4 +1,8 @@
-import { addGuestAdmin, rsvpTicketsFree } from "@/helpers/api-controller";
+import {
+  addGuestAdmin,
+  rsvpTicketsFree,
+  useTicket,
+} from "@/helpers/api-controller";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { HiCheckCircle } from "react-icons/hi";
@@ -7,6 +11,7 @@ import jsPDF from "jspdf";
 interface GuestModalProps {
   isOpen: boolean;
   onClose: () => void;
+  refetch: () => void;
   guests: any[];
   eventId: string;
   dateId: string;
@@ -20,6 +25,7 @@ export function GuestModal({
   description,
   eventId,
   dateId,
+  refetch,
 }: GuestModalProps) {
   const [showForm, setShowForm] = useState(false);
 
@@ -30,6 +36,14 @@ export function GuestModal({
     phoneNumber: "",
     ticketType: "",
     quantity: 1,
+  });
+
+  const useTicketMutation = useMutation({
+    mutationFn: (data: any) => useTicket(data),
+    onSuccess: () => {
+      refetch();
+      onClose();
+    },
   });
 
   const addGuestMutation = useMutation({
@@ -77,6 +91,9 @@ export function GuestModal({
 
       doc.save(`RSVP_${form?.name}.pdf`);
       doc.save(`RSVP-${form?.name.replace(/\s+/g, "_")}.pdf`);
+
+      refetch();
+      onClose();
     },
   });
 
@@ -87,12 +104,16 @@ export function GuestModal({
     const rows: any[] = [];
     guests?.forEach((guest, index) => {
       Object.keys(guest).forEach((key) => {
-        if (!["name", "email", "phoneNumber"].includes(key) && guest[key] > 0) {
+        if (
+          !["name", "email", "phoneNumber", "used"].includes(key) &&
+          guest[key] > 0
+        ) {
           rows.push({
             id: index + key, // give unique key
             name: guest.name,
             email: guest.email,
             phoneNumber: guest.phoneNumber,
+            used: guest.used,
             ticketType: key,
             quantity: guest[key],
           });
@@ -134,6 +155,7 @@ export function GuestModal({
                 <th className="border p-2 text-left">Phone</th>
                 <th className="border p-2 text-left">Ticket</th>
                 <th className="border p-2 text-center">Qty</th>
+                <th className="border p-2 text-center">Status</th>
               </tr>
             </thead>
             <tbody>
@@ -144,6 +166,22 @@ export function GuestModal({
                   <td className="border p-2">{guest.phoneNumber}</td>
                   <td className="border p-2">{guest.ticketType}</td>
                   <td className="border p-2 text-center">{guest.quantity}</td>
+                  <td className="border p-2 text-center">
+                    <button
+                      onClick={
+                        guest?.used
+                          ? () => {}
+                          : () =>
+                              useTicketMutation.mutate({
+                                eventId,
+                                dateId,
+                                email: guest.email,
+                              })
+                      }
+                    >
+                      {guest?.used ? "Already Used" : "Use Ticket"}
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

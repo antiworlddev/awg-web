@@ -280,6 +280,13 @@ export async function rsvpTicketsFree(data: any) {
     return error;
   }
 }
+export async function useTicket(data: any) {
+  try {
+    return axios.patch(`/api/outside/use-ticket`, data);
+  } catch (error) {
+    return error;
+  }
+}
 
 export async function addGuestAdmin(data: any) {
   try {
