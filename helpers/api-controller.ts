@@ -5,7 +5,7 @@ import { MerchProps } from "./types";
 export async function getDiscount(code: string) {
   try {
     const discount = await axios.get(
-      `/api/discounts/get-discount?code=${code}`
+      `/api/discounts/get-discount?code=${code}`,
     );
     return discount.data;
   } catch (err) {
@@ -52,7 +52,7 @@ export async function makePayment(data: any) {
 export const getExchangeRates = async () => {
   try {
     const rates = await axios.get(
-      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/ngn.json"
+      "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/ngn.json",
     );
     return rates.data;
   } catch (error) {
@@ -63,7 +63,7 @@ export const getExchangeRates = async () => {
 export async function verifyTransaction(txref: string) {
   try {
     const transaction = await axios.get(
-      `/api/payments/verify-payment?txref=${txref}`
+      `/api/payments/verify-payment?txref=${txref}`,
     );
     return transaction.data;
   } catch (error) {
@@ -196,6 +196,22 @@ export async function updateLastSeen(admin: string) {
   }
 }
 
+export async function fulfilTicket(data: any) {
+  try {
+    return axios.post(`/api/outside/fulfil-ticket`, data);
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function sendTicketEmail(data: any) {
+  try {
+    return axios.post(`/api/outside/send-ticket-email`, data);
+  } catch (error) {
+    return error;
+  }
+}
+
 // //content
 // export async function createBanner(data: any) {
 //   try {
@@ -280,6 +296,7 @@ export async function rsvpTicketsFree(data: any) {
     return error;
   }
 }
+
 export async function useTicket(data: any) {
   try {
     return axios.patch(`/api/outside/use-ticket`, data);
@@ -305,7 +322,7 @@ export async function getEventName({
 }) {
   try {
     const eventName = await axios.get(
-      `/api/outside/get-event-name?eventId=${eventId}&dateId=${dateId}`
+      `/api/outside/get-event-name?eventId=${eventId}&dateId=${dateId}`,
     );
     return eventName.data;
   } catch (err) {
@@ -318,7 +335,7 @@ export async function getEventName({
 export const fetchArtisteAlbums = async (artisteId: string) => {
   try {
     const albums = await axios.get(
-      `/api/artistes/get-artiste-albums?artistId=${artisteId}`
+      `/api/artistes/get-artiste-albums?artistId=${artisteId}`,
     );
     return albums.data;
   } catch (e) {

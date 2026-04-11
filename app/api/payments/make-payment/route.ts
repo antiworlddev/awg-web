@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
           Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return NextResponse.json(response.data);

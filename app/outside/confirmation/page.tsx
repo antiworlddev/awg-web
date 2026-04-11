@@ -1,93 +1,147 @@
 "use client";
 
-import { getEventName } from "@/helpers/api-controller";
-import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
-import { HiCheckCircle } from "react-icons/hi";
-import jsPDF from "jspdf";
-import { Suspense, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useRef, useState } from "react";
+import ConfirmationCard from "./_ui/confirmation-card";
+import { createRSVPTicket } from "@/helpers/functions";
+import { fulfilTicket, verifyTransaction } from "@/helpers/api-controller";
+import { useMutation } from "@tanstack/react-query";
+
+type ConfirmationStatus = "idle" | "processing" | "success" | "error";
+
 function ConfirmationPage() {
   const searchParams = useSearchParams();
+  const hasRun = useRef(false);
 
-  const ticketType = searchParams.get("ticketType") || "";
+  const mode = searchParams.get("mode") || "free";
+  const reference = searchParams.get("reference") || "";
+
+  const router = useRouter();
+
   const quantity = searchParams.get("quantity") || "";
   const name = searchParams.get("name") || "";
+  const phoneNumber = searchParams.get("phoneNumber") || "";
   const email = searchParams.get("email") || "";
   const description = searchParams.get("description") || "";
 
-  // Auto-generate PDF when data is ready
+  const fulfilTicketMutation = useMutation({
+    mutationFn: (ticketData: any) => {
+      console.log("Fulfilling ticket with data:", ticketData);
+      return fulfilTicket(ticketData);
+    },
+    onSuccess: async (data: any) => {
+      if (data?.data?.message === "Ticket already fulfilled") {
+        router.replace("/");
+        return;
+      }
+
+      try {
+        await fetch("/api/outside/send-ticket-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            txref: reference,
+            eventId: localStorage.getItem("eventId"),
+            dateId: localStorage.getItem("dateId"),
+            name,
+            email,
+            ticketType: localStorage.getItem("ticketType"),
+            quantity,
+          }),
+        });
+      } catch (error) {
+        console.error("Email sending failed:", error);
+      }
+
+      setStatus("success");
+      setMessage("Payment confirmed and ticket fulfilled successfully");
+    },
+  });
+
+  const [status, setStatus] = useState<ConfirmationStatus>("idle");
+  const [message, setMessage] = useState("");
+
   useEffect(() => {
-    const doc = new jsPDF();
-    doc.rect(0, 0, 210, 30, "F");
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(18);
-    doc.text(description, 105, 18, { align: "center" });
+    if (hasRun.current) return;
+    hasRun.current = true;
 
-    // Success Icon Emoji (simple)
-    doc.setTextColor(0, 150, 0);
-    doc.setFontSize(22);
-    doc.text("RSVP Confirmed", 105, 45, { align: "center" });
+    const storedEventId = localStorage.getItem("eventId");
+    const storedDateId = localStorage.getItem("dateId");
 
-    // Event Info
-    doc.setTextColor(0, 0, 0);
-    doc.setFontSize(14);
-    doc.text(`Name: ${name}`, 20, 65);
-    doc.text(`Email: ${email}`, 20, 75);
-    doc.text(`Event: ${description}`, 20, 95);
-    doc.text(`Ticket Type: ${ticketType}`, 20, 105);
-    doc.text(`Quantity: ${quantity}`, 20, 115);
+    console.log("running confirmation logic with params:");
+    const handleConfirmation = async () => {
+      try {
+        if (mode === "free") {
+          createRSVPTicket(
+            name,
+            email,
+            localStorage.getItem("ticketType") || "",
+            description,
+            quantity,
+          );
+          setStatus("success");
+          setMessage("RSVP confirmed successfully");
+          return;
+        }
 
-    // Footer
-    doc.setFontSize(10);
-    doc.setTextColor(120, 120, 120);
-    doc.text(
-      "Thank you for your RSVP. Please keep this confirmation for entry.",
-      105,
-      280,
-      { align: "center" }
-    );
+        if (mode === "paid") {
+          if (!reference) {
+            setStatus("error");
+            setMessage("Missing payment reference");
+            return;
+          }
 
-    doc.save(`RSVP_${name}.pdf`);
-    doc.save(`RSVP-${name.replace(/\s+/g, "_")}.pdf`);
-  }, [name, email, ticketType, quantity, description]);
+          setStatus("processing");
+          setMessage("Verifying payment...");
+
+          const verifyData = await verifyTransaction(reference);
+
+          if (!verifyData?.status) {
+            setStatus("error");
+            setMessage(verifyData?.message || "Payment verification failed");
+            return;
+          }
+          console.log("Payment verified, fulfilling ticket...", verifyData);
+          setMessage("Payment verified. Fulfilling ticket...");
+
+          fulfilTicketMutation.mutate({
+            txref: reference,
+            eventId: storedEventId,
+            dateId: storedDateId,
+            name,
+            email,
+            phoneNumber,
+            ticketType: localStorage.getItem("ticketType") || "",
+            quantity,
+          });
+          return;
+        }
+
+        setStatus("error");
+        setMessage("Invalid confirmation mode");
+      } catch (error) {
+        console.error("Confirmation error:", error);
+        setStatus("error");
+        setMessage("Something went wrong");
+      }
+    };
+
+    handleConfirmation();
+  }, [mode, reference, name, email, quantity, description]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
-      <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6 text-center">
-        <HiCheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-        <h1 className="mt-4 text-2xl font-bold text-gray-800">
-          RSVP Confirmed!
-        </h1>
-        <p className="mt-2 text-gray-600">
-          Thank you, <span className="font-semibold">{name}</span>. Your RSVP
-          has been recorded for: {description}
-        </p>
-
-        <div className="mt-6 border-t border-gray-200 pt-4 text-left space-y-2">
-          <p className="capitalize">
-            <span className="font-semibold">Ticket Type:</span> {ticketType}
-          </p>
-          <p>
-            <span className="font-semibold">Quantity:</span> {quantity}
-          </p>
-          <p>
-            <span className="font-semibold">Email:</span> {email}
-          </p>
-        </div>
-
-        <button
-          onClick={() => (window.location.href = "/")}
-          className="mt-8 w-full bg-black text-white py-2 rounded hover:bg-gray-900 transition"
-        >
-          Back to Home
-        </button>
-        <p className="mt-8 text-sm text-gray-500">
-          Need help?{" "}
-          <a href="mailto:support@antiworldfest.com" className="underline">
-            Contact Support
-          </a>
-        </p>
-      </div>
+      <ConfirmationCard
+        name={name}
+        description={description}
+        ticketType={localStorage.getItem("ticketType") || ""}
+        quantity={quantity}
+        email={email}
+        // status={status}
+        // message={message}
+      />
     </div>
   );
 }

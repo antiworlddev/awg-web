@@ -19,6 +19,7 @@ export interface Social {
 export interface TicketOption {
   price: number;
   count: number;
+  desc: string;
 }
 
 export interface EventDayProps {

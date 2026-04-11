@@ -38,7 +38,7 @@ export default function EventModal({
             <p>{date}</p>
           </div>
           <div className=" w-full sm:w-48">
-            <div className="relative w-full h-40 sm:h-60 rounded overflow-hidden ">
+            <div className="relative w-full h-60 sm:h-96 rounded overflow-hidden ">
               <Image
                 src={image ?? ""}
                 alt={eventName}
@@ -79,7 +79,12 @@ export default function EventModal({
         )}
         {/* Tables Section */}
         {Object.keys(tables).length > 0 ? (
-          <Tables tables={tables} description={description} />
+          <Tables
+            eventId={eventId}
+            dateId={id}
+            tables={tables}
+            description={description}
+          />
         ) : (
           <></>
         )}

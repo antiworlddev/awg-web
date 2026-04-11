@@ -5,9 +5,12 @@ import { CalendarProps } from "@/helpers/types";
 import { useQuery } from "@tanstack/react-query";
 import { GuestModal } from "./guest-modal";
 import { useState } from "react";
+import Button from "@/app/ui/button";
+import AddEventModal from "./add-event-modal";
 
 export default function EventsTable() {
-  const [openModal, setOpenModal] = useState(false);
+  const [openGuestModal, setOpenGuestModal] = useState(false);
+  const [openAddEventModal, setOpenAddEventModal] = useState(false);
   const [selectedRow, setSelectedRow] = useState<any>({});
   const {
     data: calendarData,
@@ -28,7 +31,7 @@ export default function EventsTable() {
         eventName: event.eventName,
         artistes: event.artistes,
         eventId: event.eventId,
-      }))
+      })),
     )
     .flat();
 
@@ -45,7 +48,10 @@ export default function EventsTable() {
 
   return (
     <div className="p-6 bg-white rounded-2xl shadow-sm overflow-x-auto">
-      <h2 className="text-xl font-semibold mb-4">Events</h2>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-semibold mb-4">Events</h2>
+        <Button label="Add Event" onClick={() => setOpenAddEventModal(true)} />
+      </div>
       <table className="min-w-full border-collapse text-sm">
         <thead>
           <tr className="bg-gray-100 text-left font-bold">
@@ -101,7 +107,7 @@ export default function EventsTable() {
                 <button
                   onClick={() => {
                     setSelectedRow({ ...row });
-                    setOpenModal(true);
+                    setOpenGuestModal(true);
                   }}
                   className="px-3 py-1 text-sm border bg-blue-600 text-white rounded hover:opacity-90 mt-2"
                 >
@@ -113,14 +119,21 @@ export default function EventsTable() {
         </tbody>
       </table>
 
-      {/* Modal */}
+      {/* Guest Modal */}
       <GuestModal
-        isOpen={openModal}
-        onClose={() => setOpenModal(false)}
+        isOpen={openGuestModal}
+        onClose={() => setOpenGuestModal(false)}
         guests={selectedRow?.guestlist}
         description={selectedRow?.description}
         eventId={selectedRow?.eventId}
         dateId={selectedRow?.id}
+        refetch={refetchCalendar}
+      />
+
+      {/* Add Event Modal */}
+      <AddEventModal
+        isOpen={openAddEventModal}
+        onClose={() => setOpenAddEventModal(false)}
         refetch={refetchCalendar}
       />
     </div>

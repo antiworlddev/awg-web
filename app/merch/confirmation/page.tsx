@@ -44,7 +44,7 @@ function Confirmation() {
       <td>${item.quantity}</td>
       <td>${item.item.price}</td>
     </tr>
-  `
+  `,
     )
     .join("");
 
@@ -57,7 +57,6 @@ function Confirmation() {
     onSuccess: (data: any) => {
       if (data?.data?.message === "doppelganger") {
         router.replace("/");
-      } else {
       }
     },
   });
@@ -100,7 +99,7 @@ function Confirmation() {
         setCart(JSON.parse(storedCart));
         localStorage.setItem(
           "cart",
-          JSON.stringify({ items: [], discount: "" })
+          JSON.stringify({ items: [], discount: "" }),
         );
       }
       const storedInfo = localStorage.getItem("shippingInfo");
