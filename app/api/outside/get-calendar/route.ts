@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/helpers/utils/db";
 
 export async function GET(req: NextRequest) {
+  console.log(db);
   try {
     const calendarDb = db.collection("calendar");
     const snapshot = await calendarDb.get();
@@ -31,7 +32,7 @@ export async function GET(req: NextRequest) {
           .filter((d: any) => toLocalDateOnly(d.date) >= startOfToday) // keep today & future
           .sort(
             (a: any, b: any) =>
-              new Date(a.date).getTime() - new Date(b.date).getTime()
+              new Date(a.date).getTime() - new Date(b.date).getTime(),
           )
           .map(({ guestlist, ...rest }: any) => rest);
 
@@ -56,7 +57,7 @@ export async function GET(req: NextRequest) {
     console.error("Error fetching calendar:", err);
     return NextResponse.json(
       { error: "Failed to fetch calendar" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
