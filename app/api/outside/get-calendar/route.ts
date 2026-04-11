@@ -53,10 +53,12 @@ export async function GET(req: NextRequest) {
       success: true,
       calendar: result,
     });
-  } catch (err) {
-    console.error("Error fetching calendar:", err);
+  } catch (err: any) {
+    console.error("Firestore error code:", err.code);
+    console.error("Firestore error message:", err.message);
+    console.error("Firestore error details:", err.details);
     return NextResponse.json(
-      { error: "Failed to fetch calendar" },
+      { error: "Failed to fetch calendar", details: err.message },
       { status: 500 },
     );
   }
