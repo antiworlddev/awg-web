@@ -16,6 +16,13 @@ try {
     //   : undefined,
   };
 
+  console.log("PROJECT_ID:", process.env.FIREBASE_ADMIN_PROJECT_ID);
+  console.log("CLIENT_EMAIL:", process.env.FIREBASE_ADMIN_CLIENT_EMAIL);
+  console.log(
+    "PRIVATE_KEY starts with:",
+    process.env.FIREBASE_ADMIN_PRIVATE_KEY?.slice(0, 50),
+  );
+
   if (!admin.apps.length) {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
