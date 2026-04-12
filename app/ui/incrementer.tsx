@@ -10,7 +10,7 @@ function Incrementer({ leftClick, rightClick, value }: IncrementerProps) {
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="md:w-5 md:h-5 h-3 w-3"
+        className="md:w-5 md:h-5 h-3 w-3 text-cyan-900"
       >
         <path
           strokeLinecap="round"
@@ -18,14 +18,14 @@ function Incrementer({ leftClick, rightClick, value }: IncrementerProps) {
           d="M15.75 19.5 8.25 12l7.5-7.5"
         />
       </svg>
-      <p className="lg:text-sm text-xs select-none">{value}</p>
+      <p className="lg:text-sm text-xs select-none text-cyan-900">{value}</p>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
         stroke="currentColor"
-        className="md:w-5 md:h-5 h-3 w-3"
+        className="md:w-5 md:h-5 h-3 w-3 text-cyan-900"
         onClick={rightClick}
       >
         <path

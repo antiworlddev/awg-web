@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@/app/ui/button";
 import { EventDayProps } from "@/helpers/types";
 import EventModal from "./event-modal";
+import Image from "next/image";
 
 interface EventDayWithEventName extends EventDayProps {
   eventName: string;
@@ -30,32 +31,39 @@ export default function EventDay({
   useEffect(() => {
     // Format date only on client to avoid hydration mismatch
     setFormattedDate(
-      new Date(date).toLocaleDateString("en-GB", {
-        weekday: "short",
+      new Date(date).toLocaleDateString("en-US", {
         day: "numeric",
         month: "short",
         year: "numeric",
-      })
+      }),
     );
   }, [date]);
 
   return (
     <>
       {/* Event Day row */}
-      <div className="flex w-full items-center justify-between border rounded-lg p-4 bg-white shadow-sm">
-        <div className="lg:w-1/6 w-1/5">
-          <p className="font-semibold md:text-base text-xs lg:tracking-normal tracking-tighter">
+      <div className="flex w-full items-start justify-between rounded-lg p-4 bg-orange-200 shadow-sm">
+        <div className="flex flex-col items-start lg:w-1/3 text-center mt-1 ">
+          <p className="font-semibold md:text-base text-sm uppercase tracking-tight">
+            {eventName}
+          </p>
+          <p className="font-semibold md:text-base text-xs mt-1.5 lg:tracking-normal tracking-tighter">
             {formattedDate}
           </p>
-          <p className="text-gray-600 md:text-base text-xs lg:tracking-normal tracking-tighter">
+          <p className="text-gray-600 md:text-base text-xs mt-3">{location}</p>
+          <p className="text-gray-600 md:text-base text-xs lg:tracking-normal tracking-tighter mt-1 mb-3">
             {city}, {country}
           </p>
+          <Button label="Tickets" onClick={() => setShowModal(true)} />
         </div>
-        <div className="flex flex-col items-center w-1/2 lg:w-1/3 text-center">
-          <p className="font-semibold md:text-base text-xs">{description}</p>
-          <p className="text-gray-600 md:text-base text-xs">{location}</p>
+        <div className="w-28 h-36 relative pl-4">
+          <Image
+            src={image || ""}
+            alt={eventName}
+            className="w-1/4 h-auto rounded-lg object-cover"
+            fill={true}
+          />
         </div>
-        <Button label="Tickets" onClick={() => setShowModal(true)} />
       </div>
 
       {/* Modal */}

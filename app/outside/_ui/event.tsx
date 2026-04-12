@@ -11,10 +11,10 @@ export default function Event({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="lg:text-3xl md:text-2xl text-xl font-bold">
+        <h2 className="lg:text-3xl md:text-2xl text-xl font-medium text-lightgrey tracking-wide">
           {eventName}
         </h2>
-        <p className="text-gray-500 lg:text-xl md:text-lg text-sm font-semibold">
+        <p className="lg:text-xl md:text-lg text-sm font-extralight text-lightgrey">
           {artistes.join(", ")}
         </p>
       </div>

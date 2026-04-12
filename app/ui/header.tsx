@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LuMicVocal } from "react-icons/lu";
+import { LuCalendar, LuCalendarDays, LuMicVocal } from "react-icons/lu";
 
 export default function Header({ itemsCount }: { itemsCount?: number }) {
   const pathname = usePathname();
@@ -23,7 +23,7 @@ export default function Header({ itemsCount }: { itemsCount?: number }) {
       <div className="lg:w-36 w-20 flex items-center justify-center lg:justify-end">
         <Link href="/outside" className=" mr-3">
           {pathname.startsWith("/outside") ? (
-            <LuMicVocal size={25} />
+            <LuCalendarDays size={25} />
           ) : (
             <p className="font-black tracking-wider lg:text-sm text-xs hover:text-yellow-600 ease-in transition-colors">
               OUTSIDE

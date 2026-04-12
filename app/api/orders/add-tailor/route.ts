@@ -12,7 +12,7 @@ export async function PUT(req: NextRequest) {
     if (!id) {
       return NextResponse.json(
         { success: false, message: "Order ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -24,7 +24,7 @@ export async function PUT(req: NextRequest) {
     if (!orderSnapshot.exists) {
       return NextResponse.json(
         { success: false, message: "Order not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -36,13 +36,13 @@ export async function PUT(req: NextRequest) {
 
     return NextResponse.json(
       { success: true, message: "Order updated successfully" },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (err) {
     console.error("Error updating order:", err);
     return NextResponse.json(
       { success: false, message: "Failed to update order" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

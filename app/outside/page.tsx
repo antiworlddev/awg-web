@@ -25,7 +25,7 @@ export default function Outside() {
 
   const { cart } = context;
   return (
-    <main className="flex min-h-screen flex-col lg:items-start items-center w-full md:px-10 px-6">
+    <main className="flex flex-col lg:items-start items-center w-full md:px-10 px-6">
       <Header itemsCount={cart?.items?.length} />
       <div className="w-full mt-9">
         {/* Performance Banner */}

@@ -122,7 +122,7 @@ export default function Tickets({
         {Object.entries(tickets)
           .sort(([, a], [, b]) => a.price - b.price)
           .map(([type, { price, desc }]) => (
-            <div key={type} className="border p-3 rounded">
+            <div key={type} className="border border-cyan-900 p-3 rounded">
               {/* Row */}
               <div className="flex justify-between items-center">
                 <div>

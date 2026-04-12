@@ -4,7 +4,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/helpers/utils/db";
 
 export async function GET(req: NextRequest) {
-  console.log(db);
   try {
     const calendarDb = db.collection("calendar");
     const snapshot = await calendarDb.get();

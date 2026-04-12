@@ -5,13 +5,15 @@ import Event from "./event";
 
 export default function Calendar({ events }: CalendarProps) {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8 space-y-12 my-5">
-      <p className="lg:text-4xl md:text-3xl text-2xl font-bold tracking-wide">
-        SEE WHAT'S POPPING
+    <div className="max-w-7xl mx-auto px py-8 space-y-6 mt-2">
+      <p className="lg:text-4xl md:text-3xl text-2xl font-normal tracking-normal">
+        Upcoming Events
       </p>
-      {events?.map((event, idx) => (
-        <Event key={idx} {...event} />
-      ))}
+      <div className="bg-amber-900 bg-opacity-85 rounded-lg px-2.5 pt-2 pb-3">
+        {events?.map((event, idx) => (
+          <Event key={idx} {...event} />
+        ))}
+      </div>
     </div>
   );
 }

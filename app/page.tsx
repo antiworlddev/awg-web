@@ -33,7 +33,7 @@ export default function Home() {
   const videoIds = ["c551kDpThuw", "NncnrNTtAxQ", "y_aoDpAGbFY", "DqMtbVI1UyI"];
 
   return (
-    <main className="flex min-h-screen flex-col lg:items-start items-center w-full lg:px-24 md:px-12 px-6">
+    <main className="flex flex-col lg:items-start items-center w-full lg:px-24 md:px-12 px-6">
       <Header itemsCount={context?.cart?.items?.length} />
       <HeroGrid />
       <ArtisteNav font={vast_shadow.className} />

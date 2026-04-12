@@ -27,7 +27,7 @@ export default function EventModal({
 }: EventModalProps) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-      <div className="bg-white rounded-lg max-w-3xl w-full p-6 shadow-lg overflow-y-auto max-h-[90vh]">
+      <div className="bg-orange-200 rounded-lg max-w-3xl w-full p-6 shadow-lg overflow-y-auto max-h-[90vh]">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
           <div className="flex-1">
