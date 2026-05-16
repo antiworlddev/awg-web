@@ -9,7 +9,7 @@ export default function Calendar({ events }: CalendarProps) {
       <p className="lg:text-4xl md:text-3xl text-2xl font-normal tracking-normal">
         Upcoming Events
       </p>
-      <div className="bg-amber-900 bg-opacity-85 rounded-lg px-2.5 pt-2 pb-3">
+      <div className="bg-amber-900 bg-opacity-85 rounded-lg px-4 pt-3 pb-3">
         {events?.map((event, idx) => (
           <Event key={idx} {...event} />
         ))}

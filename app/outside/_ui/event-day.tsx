@@ -44,7 +44,7 @@ export default function EventDay({
       {/* Event Day row */}
       <div className="flex w-full items-start justify-between rounded-lg p-4 bg-orange-200 shadow-sm">
         <div className="flex flex-col items-start lg:w-1/3 text-center mt-1 ">
-          <p className="font-semibold md:text-base text-sm uppercase tracking-tight">
+          <p className="font-semibold md:text-base text-sm text-left uppercase tracking-tight">
             {eventName}
           </p>
           <p className="font-semibold md:text-base text-xs mt-1.5 lg:tracking-normal tracking-tighter">

@@ -26,7 +26,7 @@ export default function EventsTable() {
 
   const rows = events
     ?.map((event: any) =>
-      event.dates.map((day: any) => ({
+      event?.dates?.map((day: any) => ({
         ...day,
         eventName: event.eventName,
         artistes: event.artistes,
@@ -67,16 +67,16 @@ export default function EventsTable() {
         </thead>
         <tbody>
           {rows?.map((row: any) => (
-            <tr key={row.id} className="border-b hover:bg-gray-50 text-xs">
-              <td className="p-3 font-medium">{row.eventName}</td>
-              <td className="p-3">{new Date(row.date).toDateString()}</td>
+            <tr key={row?.id} className="border-b hover:bg-gray-50 text-xs">
+              <td className="p-3 font-medium">{row?.eventName}</td>
+              <td className="p-3">{new Date(row?.date).toDateString()}</td>
               <td className="p-3">
-                {row.city}, {row.country}
+                {row?.city}, {row?.country}
               </td>
-              <td className="p-3">{row.location}</td>
+              <td className="p-3">{row?.location}</td>
               <td className="p-3">
                 <div className="flex flex-wrap gap-1">
-                  {row.artistes.map((artist: any, i: number) => (
+                  {row?.artistes.map((artist: any, i: number) => (
                     <span
                       key={i}
                       className="px-2 py-1 bg-gray-200 rounded text-xs"
@@ -87,18 +87,22 @@ export default function EventsTable() {
                 </div>
               </td>
               <td className="p-3">
-                {Object.entries(row.tickets).map(([type, t]: any) => (
-                  <div className="capitalize" key={type}>
-                    🎟 {type}: ₦{formatNumber(t.price)} ({t?.count})
-                  </div>
-                ))}
+                {row?.tickets
+                  ? Object.entries(row?.tickets).map(([type, t]: any) => (
+                      <div className="capitalize" key={type}>
+                        🎟 {type}: ₦{formatNumber(t.price)} ({t?.count})
+                      </div>
+                    ))
+                  : null}
               </td>
               <td className="p-3">
-                {Object.entries(row.tables).map(([type, t]: any) => (
-                  <div className="capitalize" key={type}>
-                    🪑 {type}: ₦{formatNumber(t.price)} ({t.count})
-                  </div>
-                ))}
+                {row?.tables
+                  ? Object.entries(row?.tables).map(([type, t]: any) => (
+                      <div className="capitalize" key={type}>
+                        🪑 {type}: ₦{formatNumber(t.price)} ({t.count})
+                      </div>
+                    ))
+                  : null}
               </td>
               <td className="p-3 text-right">
                 <button className="px-3 py-1 text-sm border rounded hover:bg-gray-100">
