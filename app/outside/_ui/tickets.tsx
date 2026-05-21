@@ -86,7 +86,7 @@ export default function Tickets({
   const handleIncrement = (type: string) => {
     setQuantities((prev) => ({
       ...prev,
-      [type]: prev[type] === 2 ? prev[type] : (prev[type] || 0) + 1,
+      [type]: prev[type] === 5 ? prev[type] : (prev[type] || 0) + 1,
     }));
   };
 

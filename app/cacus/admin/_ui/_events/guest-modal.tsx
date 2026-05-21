@@ -29,6 +29,8 @@ export function GuestModal({
 }: GuestModalProps) {
   const [showForm, setShowForm] = useState(false);
 
+  const [searchEmail, setSearchEmail] = useState("");
+
   // form state
   const [form, setForm] = useState({
     name: "",
@@ -123,6 +125,10 @@ export function GuestModal({
     return rows;
   };
 
+  const filteredGuests = normalizeGuests(guests)?.filter((guest) =>
+    guest?.email?.toLowerCase()?.includes(searchEmail?.toLowerCase()),
+  );
+
   const handleAddGuest = () => {
     if (!form.name || !form.email || !form.ticketType) return; // basic validation
 
@@ -144,6 +150,34 @@ export function GuestModal({
             ✕
           </button>
         </div>
+        <div className="px-4 pt-4 pb-2 border-b bg-gray-50">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Search Guest Email
+          </label>
+
+          <input
+            type="email"
+            placeholder="john@email.com"
+            value={searchEmail}
+            onChange={(e) => setSearchEmail(e.target.value)}
+            className="
+      w-full
+      border
+      border-gray-300
+      bg-white
+      rounded-lg
+      px-4
+      py-2.5
+      text-sm
+      outline-none
+      transition-all
+      focus:ring-2
+      focus:ring-black/10
+      focus:border-black
+      placeholder:text-gray-400
+    "
+          />
+        </div>
 
         {/* Scrollable Content */}
         <div className="overflow-y-auto p-4 flex-1">
@@ -159,7 +193,7 @@ export function GuestModal({
               </tr>
             </thead>
             <tbody>
-              {normalizeGuests(guests)?.map((guest) => (
+              {filteredGuests?.map((guest) => (
                 <tr key={guest.id} className="hover:bg-gray-50">
                   <td className="border p-2">{guest.name}</td>
                   <td className="border p-2">{guest.email}</td>
