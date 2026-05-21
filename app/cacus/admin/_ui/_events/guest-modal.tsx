@@ -222,15 +222,15 @@ export function GuestModal({
           </table>
 
           {/* Add Guest Button */}
-          {/* <button
+          <button
             onClick={() => setShowForm(!showForm)}
             className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-500 mb-4"
           >
             {showForm ? "Cancel" : "Add Guest"}
-          </button> */}
+          </button>
 
           {/* Form */}
-          {/* {showForm && (
+          {showForm && (
             <div className="border p-4 rounded bg-gray-50">
               <div className="grid grid-cols-2 gap-2">
                 <input
@@ -283,7 +283,7 @@ export function GuestModal({
                 Add
               </button>
             </div>
-          )} */}
+          )}
         </div>
 
         {/* Footer */}
